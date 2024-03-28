@@ -1,0 +1,24 @@
+<div *ngIf="enabled" class="settings">
+    <div class="settings__background" (click)="onClickOutside()"></div>
+    <div #boxElement class="settings__box">
+        <div class="settings__header">
+            <div class="settings__icon"></div>
+            <h2 class="settings__title">Settings</h2>
+        </div>
+        <div class="settings__details">
+            <p class="settings__subtitle">Detaljer</p>
+            <span class="settings__content">
+                <p class="settings__description">Se mer detaljer på lista</p>
+                <toggle [toggle]="settings.detailsMode" (toggleChange)="onChangeDetailsMode($event)"></toggle>
+            </span>
+        </div>
+
+        <div class="settings__sort">
+            <p class="settings__subtitle">Sortering</p>
+            <span class="settings__content--sort">
+                <p class="settings__description--sort">Velg hvordan lista skal sorteres</p>
+                <select-box [options]="sortOptions" [select]="settings.sort" (selectChange)="onChangeSortSelect($event)"></select-box>
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,30 @@
-<p>destination-overview works!</p>
+<div class="destination-overview" #overviewElement>
+    <div *ngIf="!loading">
+        <div class="destination-overview__header"> 
+            <h1>{{settings.destination}}</h1>
+            <p (click)="settingsService.onClickSettings()" class="destination-overview__clock">{{getClock()}}</p>
+        </div>
+        <div class="destination-overview__board">
+            <div *ngIf="settings.detailsMode">
+                <destination-table-details [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON"></destination-table-details>
+                <destination-table-details [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON"></destination-table-details>
+                <destination-table-details [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON"></destination-table-details>
+            </div>
+            <div *ngIf="!settings.detailsMode">
+                <destination-table-info [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON"></destination-table-info>
+                <destination-table-info [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON"></destination-table-info>
+                <destination-table-info [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON"></destination-table-info>
+            </div>
+        </div>
+    </div>
+</div>
+<settings 
+    [settings]="settingsDataJSON"
+    (settingsChange)="onChangeSetting($event)"
+    [enabled]="settingsService.showSettings" 
+    (enabledOnChange)="settingsService.closeSettings($event)">
+</settings>
+<div class="destination-overview__loading" *ngIf="loading">
+    <div class="destination-overview__loading--img">
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="destination-table-details" *ngIf="isActive">
+    <div class="destination-table-details__subheader">
+        <i [class]="'destination-table-details__icon--' + type"></i>
+        <h2>{{title}}</h2>
+    </div>
+    <div [class]="'destination-table-details__' + type">
+        <div *ngFor="let destination of destinations.destinations">
+            <div (click)="expandDestinationItem(destination)" class="destination-table-details__board--item" *ngIf="vehicleType(destination.type)">
+                <div class="destination-table-details__board--title">
+                    <h2><span [class]="'destination-table-details__board--pill-' + destination.type">
+                        {{destination.routeNumberDisplay}}</span> 
+                        {{destination.destinationName}}
+                    </h2>
+                </div>
+                <div class="destination-table-details__board--time">
+                    {{destination.routeList[0].realTime}}
+                </div>
+                <div class="destination-table-details__board--status">
+                    <span [class]="'destination-table-details__board--status-' + destination.routeList[0].departureStatus"></span>
+                    {{destination.routeList[0].departureStatusDisplay}}
+                </div>
+                <div class="destination-table-details__board--toggle">
+                    <span [class]="!destination.expanded ? 'destination-table-details__board--toggle-arrow' : 'destination-table-details__board--toggle-arrow-expand'"></span>
+                </div>
+            </div>
+            <div *ngIf="destination.expanded && vehicleType(destination.type)" class="destination-table-details__board--details">
+                <div class="destination-table-details__board--details-time">
+                    <span class="destination-table-details__board--details-time--item">
+                        {{destination.routeList[0].realTime}}
+                    </span>
+                    <span class="destination-table-details__board--details-time--item" *ngFor="let route of destination.routeList | slice:1:destination.routeList.length">
+                        {{route.realTime}}
+                    </span>
+                    <span  class="destination-table-details__board--details-time--item" *ngFor="let n of appendEmptyTimes(5-destination.routeList.length)">
+                        -
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
