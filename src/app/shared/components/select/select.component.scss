@@ -1,0 +1,15 @@
+.select {
+    &__box {
+        background-color:#111218;
+        border: 2px solid #363949;
+        padding: 12px 10px;
+        font-size: 16px;
+        color: #FFF;
+        width: 100%;
+
+        &:focus-visible {
+            outline: none;
+        }
+        
+    }
+}

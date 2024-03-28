@@ -1,0 +1,62 @@
+.toggle {
+
+    &__button {
+        width: 50px;
+        height: 24px;
+        border-radius: 200px;
+        cursor: pointer;
+
+        &--off {
+            @extend .toggle__button;
+            background-color: #111218;
+            border: 2px solid #111218;
+        }
+
+        &--on {
+            @extend .toggle__button;
+            background-color: #49a747;
+            border: 2px solid #49a747;
+        }
+
+    }
+
+    &__thumb {
+        background-color: #dddddd;
+        width: 24px;
+        height: 24px;
+        border-radius: 200px;
+
+        &--off {
+            @extend .toggle__thumb;
+            float: left;
+            width: 50%;
+            animation: switch-off 0.75s;
+        }
+
+        &--on {
+            @extend .toggle__thumb;
+            float: right;
+            width: 50%;
+            animation: switch-on 0.75s;
+        }
+
+        @keyframes switch-on {
+            0% {
+                width: 100%;
+            }
+            100% {
+                width: 50%;
+            }
+        }
+
+        @keyframes switch-off {
+            0% {
+                width: 100%;
+            }
+            100% {
+                width: 50%;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,9 @@
+<div class="select">
+    <select #selecting class="select__box" (change)="onChangeSelect(selecting.value)">
+        <option *ngFor="let option of options" [value]="option.value" [selected]="option.value === select">
+            {{option.name}}
+        </option>
+    </select>
+</div>
+    
+
