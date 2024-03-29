@@ -83,8 +83,15 @@
              width: 40%;
          }
 
-         &--destination-name {
-            margin-left: 12px;
+         &--destination-title {
+            display: flex;
+            align-items: center;
+        }
+
+        &--destination-name {
+            display: block;
+            margin-left: 9px;
+            width: 100%;
         }
  
          &--time {
@@ -238,10 +245,11 @@
      }
 
      @media only screen and (max-width: 550px) {
-        h2 {
-            font-size: 17px;
-        }
         &__board  {
+            &--title {
+                font-size: 14px;
+            }
+            
             &--destination-name {
                 font-size: 17px;
             }
@@ -257,8 +265,15 @@
                         padding: 6px 9px;
                     }
                 }
-            }         
-        }  
+            }  
+            
+            &--toggle {
+                &-arrow {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
     }
 
 }
