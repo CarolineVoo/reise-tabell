@@ -82,6 +82,10 @@
          &--title {
              width: 40%;
          }
+
+         &--destination-name {
+            margin-left: 12px;
+        }
  
          &--time {
              width: 10%;
@@ -232,5 +236,29 @@
              }
          }
      }
+
+     @media only screen and (max-width: 550px) {
+        h2 {
+            font-size: 17px;
+        }
+        &__board  {
+            &--destination-name {
+                font-size: 17px;
+            }
+
+            &--status {
+                width: 17%;
+            }
+
+            &--details {
+                &-time {
+                    &--item {
+                        font-size: 16px;
+                        padding: 6px 9px;
+                    }
+                }
+            }         
+        }  
+    }
 
 }
