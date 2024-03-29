@@ -120,5 +120,39 @@
             display: none;
         }
     }
+
+    @media only screen and (max-width: 550px) {
+        &__box,
+        &__header,
+        &__details,
+        &__sort  {
+            width: 250px;
+        }
+
+        &__box {
+            animation: slide--small 1s ease;
+            &--close {
+                animation: slide-out--small 1s ease;
+            }
+        }
+
+    }
     
+    @keyframes slide-out--small {
+        0% {
+            width: 250px;
+        }
+        100% {
+            width: 0px;
+        }
+    }
+
+    @keyframes slide--small {
+        0% {
+            width: 0px;
+        }
+        100% {
+            width: 250px;
+        }
+    }
 }
