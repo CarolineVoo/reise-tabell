@@ -7,9 +7,11 @@
         <div *ngFor="let destination of destinations.destinations">
             <div class="destination-table-info__board--item" *ngIf="vehicleType(destination.type)">
                 <div class="destination-table-info__board--title">
-                    <h2><span [class]="'destination-table-info__board--pill-' + destination.type">
-                        {{destination.routeNumberDisplay}}</span> 
-                        {{destination.destinationName}}
+                    <h2 class="destination-table-info__board--destination-title">
+                        <span [class]="'destination-table-info__board--pill-' + destination.type"> 
+                            {{destination.routeNumberDisplay}}
+                        </span> 
+                        <span [class]="'destination-table-info__board--destination-name'">{{destination.destinationName}}</span>
                     </h2>
                 </div>
                 

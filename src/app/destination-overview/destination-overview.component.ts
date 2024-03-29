@@ -32,13 +32,13 @@ export class DestinationOverviewComponent implements OnInit {
     sessionStorage.removeItem("destinationToggleData");
     this.initDestinationModel();
     this.getDestinationsData();
-    setInterval(()=> {
-      this.getDestinationsData();
-    }, 16000);
+    // setInterval(()=> {
+    //   this.getDestinationsData();
+    // }, 16000);
 
-    setInterval(()=> {
-      location.reload();
-    }, 300000);
+    // setInterval(()=> {
+    //   location.reload();
+    // }, 300000);
   }
 
   private initDestinationModel() {

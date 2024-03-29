@@ -81,6 +81,17 @@
          &--title {
              width: 45%;
          }
+
+         &--destination-title {
+            display: flex;
+            align-items: center;
+        }
+
+        &--destination-name {
+            display: block;
+            margin-left: 9px;
+            width: 100%;
+        }
  
          &--time {
              width: 40%;
@@ -176,4 +187,36 @@
          }
 
      }
+
+     @media (orientation: portrait) {
+        &__board  {
+            &--destination-name {
+                width: 90%;
+            }
+        }  
+    }
+
+     @media only screen and (max-width: 450px) {
+        &__board  {
+            &--title {
+                font-size: 14px;
+            }
+
+            &--time {
+                &--item {
+                    font-size: 14px;
+                    padding: 6px;
+                }
+            }
+
+            &--status{
+                width: 2.5%;
+            }
+
+            &--destination-name {
+                width: 100%;
+                font-size: 17px;
+            }
+        }  
+    }
 }
