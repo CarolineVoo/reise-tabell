@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule} from '@angular/common/http';
-
+import { AppRoutingModule } from './app-routing.module';
+import { Location } from '@angular/common';
 import { AppComponent } from './app.component';
 import { DestinationOverviewComponent } from './destination-overview/destination-overview.component';
 import { SettingsComponent } from './destination-overview/settings/settings.component';
@@ -26,7 +27,7 @@ import { SelectComponent } from './shared/components/select/select.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    
+    AppRoutingModule
   ],
   providers: [DestinationsService, SettingsService],
   bootstrap: [AppComponent]

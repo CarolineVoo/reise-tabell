@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { SettingsModel } from '../models/settings.model';
 import { OptionsModel } from '../models/options.model';
 import DestinationsModel from '../models/destinations.model';
+import { QueryParamModel } from '../models/query-param.model';
+import { Location } from '@angular/common';
 
 @Injectable({
     providedIn: 'root'
@@ -13,17 +15,19 @@ export class SettingsService {
     public sortOptions = this.sortingOptions();
     public showSettings: boolean;
 
-    constructor() { }
+    constructor(private location: Location) { }
 
     //------------------------------------------//
     //           D E F A U L T                 //
     //-----------------------------------------//
-    private defaultSettings(): SettingsModel {
-        return {
-            destination: 'Veitvet',
-            detailsMode: false,
-            sort: 'realtime'
+    private defaultSettings(queryParam: QueryParamModel): SettingsModel {
+        const settings: SettingsModel =  {
+            destination: queryParam.destination ? queryParam.destination : 'Veitvet',
+            detailsMode: queryParam.detailsMode == 'true',
+            sort: queryParam.sort ? queryParam.sort : 'realTime'
         }
+        this.updateQueryString(settings);
+        return settings;
     }
 
     private sortingOptions(): Array<OptionsModel> {
@@ -43,12 +47,14 @@ export class SettingsService {
     //            S E T T I N G S              //
     //-----------------------------------------//
 
-    public setSettings(): SettingsModel {
+    public setSettings(queryParam: QueryParamModel): SettingsModel {
         const settingsData = sessionStorage.getItem("settingsDate");
         if (!settingsData) {
-            return this.defaultSettings();
+            return this.defaultSettings(queryParam);
         }
-        return JSON.parse(settingsData);
+        const settings = JSON.parse(settingsData);
+        //this.updateQueryString(settings);
+        return settings;
     }
 
     public onClickSettings() {
@@ -90,6 +96,14 @@ export class SettingsService {
     
     private sortAfterRouteID(destinationData: DestinationsModel) {
         return destinationData.destinations.sort((a, b) => a.routeNumber - b.routeNumber);
+    }
+
+    //------------------------------------------//
+    //               O T H E R                 //
+    //-----------------------------------------//
+
+    public updateQueryString(settings: SettingsModel): void {
+        this.location.replaceState(`/?destination=${settings.destination}&detailsMode=${settings.detailsMode}&sort=${settings.sort}`);
     }
     
 

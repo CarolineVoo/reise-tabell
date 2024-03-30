@@ -5,6 +5,8 @@ import DestinationsModel from '../models/destinations.model';
 import { DestinationModel } from '../models/destination.model';
 import { SettingsModel } from '../models/settings.model';
 import { SettingsService } from '../services/settings.service';
+import { ActivatedRoute } from '@angular/router';
+import { QueryParamModel } from '../models/query-param.model';
 
 @Component({
   selector: 'destination-overview',
@@ -20,14 +22,17 @@ export class DestinationOverviewComponent implements OnInit {
   settings: SettingsModel;
   settingsDataJSON: string;
   loading: boolean;
+  destination: string;
 
   constructor(
     public destinationsService: DestinationsService, 
     public settingsService: SettingsService,
-    private cdr: ChangeDetectorRef, 
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
     private renderer: Renderer2) { }
 
   ngOnInit(): void {
+    this.getQueryParamDataFromUrl();
     this.loading = true;
     sessionStorage.removeItem("destinationToggleData");
     this.initDestinationModel();
@@ -50,7 +55,6 @@ export class DestinationOverviewComponent implements OnInit {
     try {
       const data = await this.destinationsService.getDestinationsData();
       const json = await this.convertXmlToJson(data);
-      this.settings = this.settingsService.setSettings();
       this.destinationsData = this.getRuterData(json);
       this.destinationDataJSON = JSON.stringify(this.destinationsData);
       this.settingsDataJSON = JSON.stringify(this.settings);
@@ -255,6 +259,7 @@ export class DestinationOverviewComponent implements OnInit {
     this.settings = JSON.parse(event);
     this.destinationsData = this.settingsService.sortDestination(this.settings.sort, this.destinationsData);
     this.destinationDataJSON = JSON.stringify(this.destinationsData);
+    this.settingsService.updateQueryString(this.settings);
   }
 
   private getSaveToggleData(routeID: string, destinationName: string): boolean {
@@ -277,6 +282,21 @@ export class DestinationOverviewComponent implements OnInit {
     if(numberOfDestinations < 20) {
       this.renderer.setAttribute(this.overviewElement.nativeElement, 'class', 'destination-overview__zoom--large');
     }
+  }
+
+  private getQueryParamDataFromUrl(): void {
+    this.route.queryParams.subscribe(params => {
+      const queryParam: QueryParamModel = new QueryParamModel();
+      if(params['destination']) {
+        queryParam.destination = params['destination'];
+      }
+      if(params['sort']) {
+        queryParam.sort = params['sort'];
+      }
+      queryParam.detailsMode = params['detailsMode'];
+
+      this.settings = this.settingsService.setSettings(queryParam);
+    });
   }
 
 }
