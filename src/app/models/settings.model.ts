@@ -1,5 +1,5 @@
 export class SettingsModel {
-    destination?: string;
+    destination: string;
     detailsMode: boolean;
     sort: string;
 }

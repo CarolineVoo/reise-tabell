@@ -17,6 +17,7 @@
         font-size: 16px;
         color: #FFF;
         width: 100%;
+        box-sizing: border-box;
 
         &:focus-visible {
             outline: none;
@@ -26,7 +27,7 @@
     &__clear {
         position: absolute;
         top: 8px;
-        right: -14px;
+        right: 6px;
         width: 24px;
         height: 24px;
         display: block;

@@ -7,13 +7,22 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 })
 export class InputTextComponent {
   @ViewChild('inputText') inputText: ElementRef;
-  
-  @Output() textChange = new EventEmitter<string>();
-  @Input() text: string;
   @Input() label: string;
   @Input() placeholder: string;
+  @Output() textChange = new EventEmitter<string>();
+  @Input() set text (value: string | undefined) {
+    if(!value) {
+      return;
+    }
+    this.showClearIcon = true;
+    this.textValue = value;
+  }
+  get text() {
+    return this.textValue;
+  }
 
   public showClearIcon: boolean;
+  public textValue: string;
 
   public onChangeValue(event: Event): void {
     let value = (event.target as HTMLInputElement).value;

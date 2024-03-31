@@ -294,8 +294,9 @@ export class DestinationOverviewComponent implements OnInit {
       if(params[Constants.QUERY_PARAM_SORT]) {
         queryParam.sort = params[Constants.QUERY_PARAM_SORT];
       }
-      queryParam.detailsMode = params[Constants.QUERY_PARAM_DETAILS_MODE];
-
+      if(params[Constants.QUERY_PARAM_DETAILS_MODE]) {
+        queryParam.detailsMode = params[Constants.QUERY_PARAM_DETAILS_MODE];
+      }
       this.settings = this.settingsService.setSettings(queryParam);
     });
   }

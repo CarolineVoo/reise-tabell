@@ -5,7 +5,16 @@
             <div class="settings__icon"></div>
             <h2 class="settings__title">Settings</h2>
         </div>
-        <div class="settings__details">
+
+        <div class="settings__section">
+            <p class="settings__subtitle">Search</p>
+            <span class="settings__content--desetinations">
+                <p class="settings__description">Søk etter destinasjon</p>
+                <input-text [text]="settings.destination" (textChange)="onChangeDestination($event)"></input-text>
+            </span>
+        </div>
+
+        <div class="settings__section">
             <p class="settings__subtitle">Detaljer</p>
             <span class="settings__content">
                 <p class="settings__description">Se mer detaljer på lista</p>
@@ -13,7 +22,7 @@
             </span>
         </div>
 
-        <div class="settings__sort">
+        <div class="settings__section">
             <p class="settings__subtitle">Sortering</p>
             <span class="settings__content--sort">
                 <p class="settings__description--sort">Velg hvordan lista skal sorteres</p>

@@ -23,6 +23,7 @@
     (settingsChange)="onChangeSetting($event)"
     [enabled]="settingsService.showSettings" 
     (enabledOnChange)="settingsService.closeSettings($event)">
+    
 </settings>
 <div class="destination-overview__loading" *ngIf="loading">
     <div class="destination-overview__loading--img">

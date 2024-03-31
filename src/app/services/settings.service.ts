@@ -61,7 +61,7 @@ export class SettingsService {
     private savedSettings(queryParam: QueryParamModel, settingsData: SettingsModel): SettingsModel {
         const settings: SettingsModel =  {
             destination: queryParam.destination ? queryParam.destination : settingsData.destination,
-            detailsMode: queryParam.detailsMode ? Boolean(queryParam.detailsMode) : settingsData.detailsMode,
+            detailsMode: queryParam.detailsMode == 'true' ? true : (queryParam.detailsMode == 'false') ? false : settingsData.detailsMode,
             sort: queryParam.sort ? queryParam.sort : settingsData.sort
         }
         return settings;

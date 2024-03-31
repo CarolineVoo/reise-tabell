@@ -33,6 +33,11 @@ export class SettingsComponent {
     private renderer: Renderer2
   ) {}
 
+  onChangeDestination(value: string): void {
+    //this.settings.destination = value;
+    //this.setSettings();
+  }
+
   onChangeDetailsMode(value: boolean): void {
     this.settings.detailsMode = value;
     this.setSettings()

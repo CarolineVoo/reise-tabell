@@ -12,7 +12,7 @@
         align-items: center;
         width: 400px;
         border-bottom: 2px solid #FFF;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
 
     &__icon {
@@ -79,8 +79,7 @@
         }
     }
 
-    &__details,
-    &__sort {
+    &__section {
         width: 400px;
         margin-bottom: 30px;
     }
