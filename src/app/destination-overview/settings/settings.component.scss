@@ -84,6 +84,28 @@
         margin-bottom: 30px;
     }
 
+    &__input {
+        display: flex;
+        justify-content: space-between;
+        &--text {
+            width: 80%;
+        }
+    }
+
+    &__button {
+        &--search {
+            display: block;
+            margin-top: 6px;
+            height: 45px;
+            padding: 0 25px;
+            //padding: 10px 30px;
+            background-color:  #363949;
+            color: #FFF;
+            border: 0;
+            cursor: pointer;
+        }
+    }
+
     @keyframes opacity {
         0% {
             opacity: 0;
@@ -122,9 +144,7 @@
 
     @media only screen and (max-width: 550px) {
         &__box,
-        &__header,
-        &__details,
-        &__sort  {
+        &__section {
             width: 250px;
         }
 
@@ -132,6 +152,12 @@
             animation: slide--small 1s ease;
             &--close {
                 animation: slide-out--small 1s ease;
+            }
+        }
+
+        &__button {
+            &--search {
+                padding: 0 16px;
             }
         }
 

@@ -34,8 +34,14 @@ export class SettingsComponent {
   ) {}
 
   onChangeDestination(value: string): void {
-    //this.settings.destination = value;
-    //this.setSettings();
+    this.settingsModel.destination = value;
+  }
+
+  onClickSearchDestinations() {
+    this.settings.destination = this.settingsModel.destination;
+    sessionStorage.setItem("settingsDate", JSON.stringify(this.settings));
+    this.settingsService.updateQueryString(this.settings);
+    location.reload();
   }
 
   onChangeDetailsMode(value: boolean): void {

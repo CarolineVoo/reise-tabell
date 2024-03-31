@@ -10,7 +10,12 @@
             <p class="settings__subtitle">Search</p>
             <span class="settings__content--desetinations">
                 <p class="settings__description">Søk etter destinasjon</p>
-                <input-text [text]="settings.destination" (textChange)="onChangeDestination($event)"></input-text>
+                <div class="settings__input">
+                    <div class="settings__input--text">
+                        <input-text [text]="settings.destination" (textChange)="onChangeDestination($event)"></input-text>
+                    </div>
+                    <button class="settings__button--search" (click)="onClickSearchDestinations()">Søk</button>
+                </div>
             </span>
         </div>
 
