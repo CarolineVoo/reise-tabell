@@ -1,0 +1,37 @@
+.input {
+
+    &__wrapper {
+        position: relative;
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    &__text{
+        background-color: #111218;
+        border: 0;
+        border-bottom: 3px solid #363949;
+        padding: 12px 10px;
+        font-size: 16px;
+        color: #FFF;
+        width: 100%;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+
+    &__clear {
+        position: absolute;
+        top: 8px;
+        right: -14px;
+        width: 24px;
+        height: 24px;
+        display: block;
+        cursor: pointer;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><clipPath id="a"><path d="M0 0h24v24H0z" fill="%23ffffff" opacity="1" data-original="%23000000" class=""></path></clipPath><g clip-path="url(%23a)"><path fill="%23ffffff" d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" opacity="1" data-original="%23000000" class=""></path></g></g></svg>');
+    }
+
+}

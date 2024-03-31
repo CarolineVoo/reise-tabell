@@ -1,6 +1,6 @@
 export class Constants {
     //DEFAULT SETTINGS
-    public static DESTINATION = "Jernbanetorget";
+    public static DESTINATION = "Veitvet";
     public static DETAILS_MODE = false;
     public static SORT = "realtime"
 

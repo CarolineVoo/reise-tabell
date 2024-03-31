@@ -1,0 +1,7 @@
+<div class="input">
+    <label class="input__label">{{label}}</label>
+    <div class="input__wrapper">
+        <input #inputText class="input__text" type="text" (keyup)="onChangeValue($event)" [placeholder]="placeholder ? placeholder : ''" />
+        <div *ngIf="showClearIcon" class="input__clear" (click)="onClickClearText()"></div>
+    </div>
+</div>
