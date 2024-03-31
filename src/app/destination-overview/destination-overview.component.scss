@@ -54,7 +54,16 @@
     }
     }
 
+    @media only screen and (max-width: 850px) {
+        &__zoom {
+            &--large {
+                zoom: 115%;
+            }
+        }  
+    }
+
     @media only screen and (max-width: 550px) {
+        zoom: 65%;
         &__zoom {
             &--large {
                 zoom: 65%;

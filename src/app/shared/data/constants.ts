@@ -2,7 +2,7 @@ export class Constants {
     //DEFAULT SETTINGS
     public static DESTINATION = "Jernbanetorget";
     public static DETAILS_MODE = false;
-    public static SORT = "realTime"
+    public static SORT = "realtime"
 
     //QUERY PARAMETER
     public static QUERY_PARAM_DESTINATION = "destination";
