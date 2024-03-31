@@ -11,7 +11,6 @@ import { Location } from '@angular/common';
 })
 
 export class SettingsService {
-    private settings: SettingsModel;
     public sortOptions = this.sortingOptions();
     public showSettings: boolean;
 
@@ -26,7 +25,6 @@ export class SettingsService {
             detailsMode: queryParam.detailsMode == 'true',
             sort: queryParam.sort ? queryParam.sort : 'realTime'
         }
-        this.updateQueryString(settings);
         return settings;
     }
 
@@ -49,11 +47,22 @@ export class SettingsService {
 
     public setSettings(queryParam: QueryParamModel): SettingsModel {
         const settingsData = sessionStorage.getItem("settingsDate");
+        let settings;
         if (!settingsData) {
-            return this.defaultSettings(queryParam);
+            settings = this.defaultSettings(queryParam);
+        } else {
+            settings = this.savedSettings(queryParam, JSON.parse(settingsData))
         }
-        const settings = JSON.parse(settingsData);
-        //this.updateQueryString(settings);
+        return settings;
+    }
+
+    private savedSettings(queryParam: QueryParamModel, settingsData: SettingsModel): SettingsModel {
+        const settings: SettingsModel =  {
+            destination: queryParam.destination ? queryParam.destination : settingsData.destination,
+            detailsMode: queryParam.detailsMode ? Boolean(queryParam.detailsMode) : settingsData.detailsMode,
+            sort: queryParam.sort ? queryParam.sort : settingsData.sort
+        }
+        sessionStorage.setItem("settingsDate", JSON.stringify(settings));
         return settings;
     }
 
