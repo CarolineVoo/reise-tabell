@@ -7,6 +7,7 @@ import { SettingsModel } from '../models/settings.model';
 import { SettingsService } from '../services/settings.service';
 import { ActivatedRoute } from '@angular/router';
 import { QueryParamModel } from '../models/query-param.model';
+import { Constants } from '../shared/data/constants';
 
 @Component({
   selector: 'destination-overview',
@@ -39,11 +40,11 @@ export class DestinationOverviewComponent implements OnInit {
     this.getDestinationsData();
     setInterval(()=> {
       this.getDestinationsData();
-    }, 16000);
+    }, Constants.API_CALL_TIME);
 
     setInterval(()=> {
       location.reload();
-    }, 300000);
+    }, Constants.LOADING_TIME);
   }
 
   private initDestinationModel() {
@@ -166,13 +167,13 @@ export class DestinationOverviewComponent implements OnInit {
     const routeNumber = routeIdSplits[routeIdSplits.length - 1];
 
     if(Number(routeNumber) < 6) {
-      return "tbane"
+      return Constants.TBANE
     } else if(Number(routeNumber) < 20) { 
-      return "trikk"
+      return Constants.TRIKK
     }else if(Number(routeNumber) < 100 || Number(routeNumber) > 2000) {
-      return "redbuss"
+      return Constants.RED_BUSS
     } else {
-      return "greenbuss"
+      return Constants.GREEN_BUSS
     }
   }
 
@@ -242,11 +243,11 @@ export class DestinationOverviewComponent implements OnInit {
 
   private setStatusText(status: string): string {
     switch(status) {
-      case "onTime":
+      case Constants.STATUS_ON_TIME:
         return "I rute";
-      case "delayed":
+      case Constants.STATUS_DELAYED:
         return "Forsinket";
-      case "cancelled":
+      case Constants.STATUS_CANCELLED:
         return "Kansellert"
     }
     return "";
@@ -287,13 +288,13 @@ export class DestinationOverviewComponent implements OnInit {
   private getQueryParamDataFromUrl(): void {
     this.route.queryParams.subscribe(params => {
       const queryParam: QueryParamModel = new QueryParamModel();
-      if(params['destination']) {
-        queryParam.destination = params['destination'];
+      if(params[Constants.QUERY_PARAM_DESTINATION]) {
+        queryParam.destination = params[Constants.QUERY_PARAM_DESTINATION];
       }
-      if(params['sort']) {
-        queryParam.sort = params['sort'];
+      if(params[Constants.QUERY_PARAM_SORT]) {
+        queryParam.sort = params[Constants.QUERY_PARAM_SORT];
       }
-      queryParam.detailsMode = params['detailsMode'];
+      queryParam.detailsMode = params[Constants.QUERY_PARAM_DETAILS_MODE];
 
       this.settings = this.settingsService.setSettings(queryParam);
     });

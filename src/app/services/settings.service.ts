@@ -5,6 +5,7 @@ import { OptionsModel } from '../models/options.model';
 import DestinationsModel from '../models/destinations.model';
 import { QueryParamModel } from '../models/query-param.model';
 import { Location } from '@angular/common';
+import { Constants } from '../shared/data/constants';
 
 @Injectable({
     providedIn: 'root'
@@ -21,9 +22,9 @@ export class SettingsService {
     //-----------------------------------------//
     private defaultSettings(queryParam: QueryParamModel): SettingsModel {
         const settings: SettingsModel =  {
-            destination: queryParam.destination ? queryParam.destination : 'Veitvet',
-            detailsMode: queryParam.detailsMode == 'true',
-            sort: queryParam.sort ? queryParam.sort : 'realTime'
+            destination: queryParam.destination ? queryParam.destination : Constants.DESTINATION,
+            detailsMode: queryParam.detailsMode ? Boolean(queryParam.detailsMode) : Constants.DETAILS_MODE,
+            sort: queryParam.sort ? queryParam.sort : Constants.SORT
         }
         return settings;
     }
@@ -53,6 +54,7 @@ export class SettingsService {
         } else {
             settings = this.savedSettings(queryParam, JSON.parse(settingsData))
         }
+        sessionStorage.setItem("settingsDate", JSON.stringify(settings));
         return settings;
     }
 
@@ -62,7 +64,6 @@ export class SettingsService {
             detailsMode: queryParam.detailsMode ? Boolean(queryParam.detailsMode) : settingsData.detailsMode,
             sort: queryParam.sort ? queryParam.sort : settingsData.sort
         }
-        sessionStorage.setItem("settingsDate", JSON.stringify(settings));
         return settings;
     }
 
