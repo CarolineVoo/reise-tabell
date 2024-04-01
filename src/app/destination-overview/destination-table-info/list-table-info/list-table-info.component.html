@@ -1,0 +1,29 @@
+<div class="list-table-info">
+    <div *ngFor="let destination of destinations.destinations">
+        <div class="list-table-info__board--item" *ngIf="displayList(destination.type, destination.towardsCenter)">
+            <div class="list-table-info__board--title">
+                <h2 class="list-table-info__board--destination-title">
+                    <span [class]="'list-table-info__board--pill-' + destination.type"> 
+                        {{destination.routeNumberDisplay}}
+                    </span> 
+                    <span [class]="'list-table-info__board--destination-name'">{{destination.destinationName}}</span>
+                </h2>
+            </div>
+            
+            <div class="list-table-info__board--time">
+                <div class="list-table-info__board--time--item" *ngFor="let route of destination.routeList | slice:0:3">
+                    {{route.realTime}}
+                    <span *ngIf="route.departureStatus == 'cancelled'" > - </span>
+                </div>
+                <div class="list-table-info__board--time--item" *ngFor="let n of appendEmptyTimes(3 - destination.routeList.length)">
+                    -
+                </div>
+            </div>
+
+            <div *ngIf="destination?.routeList" class="list-table-info__board--status">
+                <span [class]="'list-table-info__board--status-' + destination.routeList[0].departureStatus"></span>
+            </div>
+        </div>
+    </div>
+
+</div>

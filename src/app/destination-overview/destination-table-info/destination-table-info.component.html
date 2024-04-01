@@ -3,117 +3,16 @@
         <i [class]="'destination-table-info__icon--' + type"></i>
         <h2>{{title}}</h2>
     </div>
-    <div [class]="'destination-table-info__' + type">
+    <div [class]="'destination-table-info__item'">
         <ng-container *ngIf="!direction; else showDirection">
-            <div *ngFor="let destination of destinations.destinations">
-                <div class="destination-table-info__board--item" *ngIf="vehicleType(destination.type)">
-                    <div class="destination-table-info__board--title">
-                        <h2 class="destination-table-info__board--destination-title">
-                            <span [class]="'destination-table-info__board--pill-' + destination.type"> 
-                                {{destination.routeNumberDisplay}}
-                            </span> 
-                            <span [class]="'destination-table-info__board--destination-name'">{{destination.destinationName}}</span>
-                        </h2>
-                    </div>
-                    
-                    <div class="destination-table-info__board--time">
-                        <div class="destination-table-info__board--time--item" *ngFor="let route of destination.routeList | slice:0:3">
-                            {{route.realTime}}
-                            <span *ngIf="route.departureStatus == 'cancelled'" > - </span>
-                        </div>
-                        <div class="destination-table-info__board--time--item" *ngFor="let n of appendEmptyTimes(3 - destination.routeList.length)">
-                            -
-                        </div>
-                    </div>
-    
-                    <div *ngIf="destination?.routeList" class="destination-table-info__board--status">
-                        <span [class]="'destination-table-info__board--status-' + destination.routeList[0].departureStatus"></span>
-                    </div>
-                </div>
-            </div>
+            <list-table-info [vehicle]="vehicle" [destinations]="destinations"></list-table-info>
         </ng-container>
         <ng-template #showDirection>
             <h2 class="destination-table-info__direction--title">Retning mot sentrum</h2>
-            <div *ngFor="let destination of destinations.destinations">
-                <div class="destination-table-info__board--item" *ngIf="vehicleType(destination.type) && destination.towardsCenter">
-                    <div class="destination-table-info__board--title">
-                        <h2 class="destination-table-info__board--destination-title">
-                            <span [class]="'destination-table-info__board--pill-' + destination.type"> 
-                                {{destination.routeNumberDisplay}}
-                            </span> 
-                            <span [class]="'destination-table-info__board--destination-name'">{{destination.destinationName}}</span>
-                        </h2>
-                    </div>
-                    
-                    <div class="destination-table-info__board--time">
-                        <div class="destination-table-info__board--time--item" *ngFor="let route of destination.routeList | slice:0:3">
-                            {{route.realTime}}
-                            <span *ngIf="route.departureStatus == 'cancelled'" > - </span>
-                        </div>
-                        <div class="destination-table-info__board--time--item" *ngFor="let n of appendEmptyTimes(3 - destination.routeList.length)">
-                            -
-                        </div>
-                    </div>
-    
-                    <div *ngIf="destination?.routeList" class="destination-table-info__board--status">
-                        <span [class]="'destination-table-info__board--status-' + destination.routeList[0].departureStatus"></span>
-                    </div>
-                </div>
-            </div>
+            <list-table-info [vehicle]="vehicle" [destinations]="destinations" [directionEnabled]="true" [centrumDirection]="true"></list-table-info>
 
             <h2 class="destination-table-info__direction--title_from">Retning fra sentrum</h2>
-            <div *ngFor="let destination of destinations.destinations">
-                <div class="destination-table-info__board--item" *ngIf="vehicleType(destination.type) && !destination.towardsCenter">
-                    <div class="destination-table-info__board--title">
-                        <h2 class="destination-table-info__board--destination-title">
-                            <span [class]="'destination-table-info__board--pill-' + destination.type"> 
-                                {{destination.routeNumberDisplay}}
-                            </span> 
-                            <span [class]="'destination-table-info__board--destination-name'">{{destination.destinationName}}</span>
-                        </h2>
-                    </div>
-                    
-                    <div class="destination-table-info__board--time">
-                        <div class="destination-table-info__board--time--item" *ngFor="let route of destination.routeList | slice:0:3">
-                            {{route.realTime}}
-                            <span *ngIf="route.departureStatus == 'cancelled'" > - </span>
-                        </div>
-                        <div class="destination-table-info__board--time--item" *ngFor="let n of appendEmptyTimes(3 - destination.routeList.length)">
-                            -
-                        </div>
-                    </div>
-    
-                    <div *ngIf="destination?.routeList" class="destination-table-info__board--status">
-                        <span [class]="'destination-table-info__board--status-' + destination.routeList[0].departureStatus"></span>
-                    </div>
-                </div>
-            </div>
+            <list-table-info [vehicle]="vehicle" [destinations]="destinations" [directionEnabled]="true" [centrumDirection]="false"></list-table-info>
           </ng-template>
-        <!-- <div *ngFor="let destination of destinations.destinations">
-            <div class="destination-table-info__board--item" *ngIf="vehicleType(destination.type)">
-                <div class="destination-table-info__board--title">
-                    <h2 class="destination-table-info__board--destination-title">
-                        <span [class]="'destination-table-info__board--pill-' + destination.type"> 
-                            {{destination.routeNumberDisplay}}
-                        </span> 
-                        <span [class]="'destination-table-info__board--destination-name'">{{destination.destinationName}}</span>
-                    </h2>
-                </div>
-                
-                <div class="destination-table-info__board--time">
-                    <div class="destination-table-info__board--time--item" *ngFor="let route of destination.routeList | slice:0:3">
-                        {{route.realTime}}
-                        <span *ngIf="route.departureStatus == 'cancelled'" > - </span>
-                    </div>
-                    <div class="destination-table-info__board--time--item" *ngFor="let n of appendEmptyTimes(3 - destination.routeList.length)">
-                        -
-                    </div>
-                </div>
-
-                <div *ngIf="destination?.routeList" class="destination-table-info__board--status">
-                    <span [class]="'destination-table-info__board--status-' + destination.routeList[0].departureStatus"></span>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div> 

@@ -13,6 +13,7 @@ import { SettingsService } from './services/settings.service';
 import { ToggleComponent } from './shared/components/toggle/toggle.component';
 import { SelectComponent } from './shared/components/select/select.component';
 import { InputTextComponent } from './shared/components/input-text/input-text.component';
+import { ListTableInfoComponent } from './destination-overview/destination-table-info/list-table-info/list-table-info.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { InputTextComponent } from './shared/components/input-text/input-text.co
     DestinationTableInfoComponent,
     ToggleComponent,
     SelectComponent,
-    InputTextComponent
+    InputTextComponent,
+    ListTableInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -29,14 +29,6 @@ export class DestinationTableInfoComponent {
     return this.vehicle.includes(value)
   }
 
-  public appendEmptyTimes(n: number): Array<number> { 
-    if(n > 2 || n < 0) {
-      return [];
-    }
-
-    return Array(n); 
-  } 
-
   private setTableActive(destinations: DestinationsModel): boolean { 
     let active = false;
     destinations.destinations.forEach(route => {
