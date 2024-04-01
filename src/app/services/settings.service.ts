@@ -24,6 +24,7 @@ export class SettingsService {
         const settings: SettingsModel =  {
             destination: queryParam.destination ? queryParam.destination : Constants.DESTINATION,
             direction: queryParam.direction ? Boolean(queryParam.direction) : Constants.DIRECTION,
+            mergeRoutes: queryParam.mergeRoutes ? Boolean(queryParam.mergeRoutes) : Constants.MERGE_ROUTES,
             detailsMode: queryParam.detailsMode ? Boolean(queryParam.detailsMode) : Constants.DETAILS_MODE,
             sort: queryParam.sort ? queryParam.sort : Constants.SORT
         }
@@ -63,6 +64,7 @@ export class SettingsService {
         const settings: SettingsModel =  {
             destination: queryParam.destination ? queryParam.destination : settingsData.destination,
             direction: queryParam.direction == 'true' ? true : (queryParam.direction == 'false') ? false : settingsData.direction,
+            mergeRoutes: queryParam.mergeRoutes == 'true' ? true : (queryParam.mergeRoutes == 'false') ? false : settingsData.mergeRoutes,
             detailsMode: queryParam.detailsMode == 'true' ? true : (queryParam.detailsMode == 'false') ? false : settingsData.detailsMode,
             sort: queryParam.sort ? queryParam.sort : settingsData.sort
         }
@@ -117,9 +119,10 @@ export class SettingsService {
     public updateQueryString(settings: SettingsModel): void {
         const destination = `destination=${settings.destination}`
         const direction = `direction=${settings.direction}`
+        const mergeRoutes = `mergeRoutes=${settings.mergeRoutes}`
         const detailsMode = `detailsMode=${settings.detailsMode}`
         const sort = `sort=${settings.sort}`
-        this.location.replaceState(`/?${destination}&${direction}&${detailsMode}&${sort}`);
+        this.location.replaceState(`/?${destination}&${direction}&${mergeRoutes}&${detailsMode}&${sort}`);
     }
     
 

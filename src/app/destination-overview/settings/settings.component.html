@@ -26,6 +26,10 @@
                 <toggle [toggle]="settings.direction" (toggleChange)="onChangeDirection($event)"></toggle>
             </span>
             <span class="settings__content">
+                <p class="settings__description">Slå sammen rutene</p>
+                <toggle [toggle]="settings.mergeRoutes" (toggleChange)="onChangeMergeRoutes($event)"></toggle>
+            </span>
+            <span class="settings__content">
                 <p class="settings__description">Se mer detaljer på lista</p>
                 <toggle [toggle]="settings.detailsMode" (toggleChange)="onChangeDetailsMode($event)"></toggle>
             </span>

@@ -50,7 +50,7 @@
             color: #484c64;
 
             &_from {
-                @extend .destination-table-details;
+                @extend .destination-table-details__direction--title;
                 margin-top: 30px !important;
             }
         }

@@ -49,6 +49,11 @@ export class SettingsComponent {
     this.setSettings();
   }
 
+  onChangeMergeRoutes(value: boolean): void {
+    this.settings.mergeRoutes = value;
+    this.setSettings();
+  }
+
   onChangeDetailsMode(value: boolean): void {
     this.settings.detailsMode = value;
     this.setSettings();

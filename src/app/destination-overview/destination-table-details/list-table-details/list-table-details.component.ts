@@ -16,6 +16,18 @@ export class ListTableDetailsComponent {
   @Input() destinations: DestinationsModel;
 
   public displayList(value: string, towardsCenter: boolean): boolean {
+    if(this.directionEnabled && this.centrumDirection == towardsCenter && !this.vehicle) {
+      return true;
+    }
+
+    if(this.directionEnabled && !this.centrumDirection != towardsCenter && !this.vehicle) {
+      return true;
+    }
+
+    if(!this.vehicle && !this.directionEnabled) {
+      return true;
+    }
+
     if(!this.directionEnabled && this.vehicle.includes(value)){
       return true;
     }
@@ -32,6 +44,10 @@ export class ListTableDetailsComponent {
   }
 
   public vehicleType(value: string): boolean {
+    if(!this.vehicle) {
+      return true;
+    }
+
     return this.vehicle.includes(value)
   }
 

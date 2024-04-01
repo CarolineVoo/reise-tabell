@@ -15,6 +15,18 @@ export class ListTableInfoComponent {
 
 
   public displayList(value: string, towardsCenter: boolean): boolean {
+    if(this.directionEnabled && this.centrumDirection == towardsCenter && !this.vehicle) {
+      return true;
+    }
+
+    if(this.directionEnabled && !this.centrumDirection != towardsCenter && !this.vehicle) {
+      return true;
+    }
+
+    if(!this.vehicle && !this.directionEnabled) {
+      return true;
+    }
+
     if(!this.directionEnabled && this.vehicle.includes(value)){
       return true;
     }
@@ -28,10 +40,6 @@ export class ListTableInfoComponent {
     }
 
     return false;
-  }
-
-  public vehicleType(value: string): boolean {
-    return this.vehicle.includes(value)
   }
 
   public appendEmptyTimes(n: number): Array<number> { 

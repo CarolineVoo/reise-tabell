@@ -314,11 +314,14 @@ export class DestinationOverviewComponent implements OnInit {
       if(params[Constants.QUERY_PARAM_DIRECTION]) {
         queryParam.direction = params[Constants.QUERY_PARAM_DIRECTION];
       }
-      if(params[Constants.QUERY_PARAM_SORT]) {
-        queryParam.sort = params[Constants.QUERY_PARAM_SORT];
+      if(params[Constants.QUERY_PARAM_MERGE_ROUTES]) {
+        queryParam.mergeRoutes = params[Constants.QUERY_PARAM_MERGE_ROUTES];
       }
       if(params[Constants.QUERY_PARAM_DETAILS_MODE]) {
         queryParam.detailsMode = params[Constants.QUERY_PARAM_DETAILS_MODE];
+      }
+      if(params[Constants.QUERY_PARAM_SORT]) {
+        queryParam.sort = params[Constants.QUERY_PARAM_SORT];
       }
       this.settings = this.settingsService.setSettings(queryParam);
     });

@@ -28,7 +28,7 @@
                 <span class="list-table-details__board--details-time--item" *ngFor="let route of destination.routeList | slice:1:destination.routeList.length">
                     {{route.realTime}}
                 </span>
-                <span  class="list-table-details_board--details-time--item" *ngFor="let n of appendEmptyTimes(5-destination.routeList.length)">
+                <span class="list-table-details__board--details-time--item" *ngFor="let n of appendEmptyTimes(5-destination.routeList.length)">
                     -
                 </span>
             </div>

@@ -2,12 +2,14 @@ export class Constants {
     //DEFAULT SETTINGS
     public static DESTINATION = "Veitvet";
     public static DIRECTION = true;
+    public static MERGE_ROUTES = false;
     public static DETAILS_MODE = false;
     public static SORT = "realtime"
 
     //QUERY PARAMETER
     public static QUERY_PARAM_DESTINATION = "destination";
     public static QUERY_PARAM_DIRECTION = "direction";
+    public static QUERY_PARAM_MERGE_ROUTES = "mergeRoutes";
     public static QUERY_PARAM_DETAILS_MODE = "detailsMode";
     public static QUERY_PARAM_SORT= "sort";
 

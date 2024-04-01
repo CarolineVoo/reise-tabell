@@ -1,5 +1,5 @@
 <div class="destination-table-details" *ngIf="isActive">
-    <div class="destination-table-details__subheader">
+    <div *ngIf="title" class="destination-table-details__subheader">
         <i [class]="'destination-table-details__icon--' + type"></i>
         <h2>{{title}}</h2>
     </div>

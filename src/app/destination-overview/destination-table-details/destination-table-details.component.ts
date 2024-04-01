@@ -27,6 +27,9 @@ export class DestinationTableDetailsComponent {
   }
 
   public vehicleType(value: string): boolean {
+    if(!this.vehicle) {
+      return true;
+    }
     return this.vehicle.includes(value)
   }
 
