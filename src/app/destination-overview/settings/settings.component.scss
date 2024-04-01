@@ -86,11 +86,6 @@
     &__section {
         width: 400px;
         margin-bottom: 30px;
-
-        &--last {
-            @extend .settings__section;
-            margin-bottom: 100px;
-        }
     }
 
     &__input {
@@ -154,10 +149,11 @@
     @media only screen and (max-width: 550px) {
         &__box,
         &__section {
-            width: 250px;
+            width: 300px;
         }
 
         &__box {
+            zoom: 85%;
             animation: slide--small 1s ease;
             &--close {
                 animation: slide-out--small 1s ease;
@@ -174,7 +170,7 @@
     
     @keyframes slide-out--small {
         0% {
-            width: 250px;
+            width: 300px;
         }
         100% {
             width: 0px;
@@ -186,7 +182,7 @@
             width: 0px;
         }
         100% {
-            width: 250px;
+            width: 300px;
         }
     }
 }
