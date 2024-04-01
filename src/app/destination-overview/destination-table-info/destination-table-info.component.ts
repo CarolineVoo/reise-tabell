@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import DestinationsModel from 'src/app/models/destinations.model';
+import { SettingsModel } from 'src/app/models/settings.model';
 
 @Component({
   selector: 'destination-table-info',
@@ -14,6 +15,7 @@ export class DestinationTableInfoComponent {
   @Input() title: string;
   @Input() type: string;
   @Input() vehicle: string;
+  @Input() direction: boolean;
 
   @Input() set destinationsData(value: string) {
     if(!value) {

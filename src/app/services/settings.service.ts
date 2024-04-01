@@ -23,6 +23,7 @@ export class SettingsService {
     private defaultSettings(queryParam: QueryParamModel): SettingsModel {
         const settings: SettingsModel =  {
             destination: queryParam.destination ? queryParam.destination : Constants.DESTINATION,
+            direction: queryParam.direction ? Boolean(queryParam.direction) : Constants.DIRECTION,
             detailsMode: queryParam.detailsMode ? Boolean(queryParam.detailsMode) : Constants.DETAILS_MODE,
             sort: queryParam.sort ? queryParam.sort : Constants.SORT
         }
@@ -61,6 +62,7 @@ export class SettingsService {
     private savedSettings(queryParam: QueryParamModel, settingsData: SettingsModel): SettingsModel {
         const settings: SettingsModel =  {
             destination: queryParam.destination ? queryParam.destination : settingsData.destination,
+            direction: queryParam.direction == 'true' ? true : (queryParam.direction == 'false') ? false : settingsData.direction,
             detailsMode: queryParam.detailsMode == 'true' ? true : (queryParam.detailsMode == 'false') ? false : settingsData.detailsMode,
             sort: queryParam.sort ? queryParam.sort : settingsData.sort
         }
@@ -113,7 +115,11 @@ export class SettingsService {
     //-----------------------------------------//
 
     public updateQueryString(settings: SettingsModel): void {
-        this.location.replaceState(`/?destination=${settings.destination}&detailsMode=${settings.detailsMode}&sort=${settings.sort}`);
+        const destination = `destination=${settings.destination}`
+        const direction = `direction=${settings.direction}`
+        const detailsMode = `detailsMode=${settings.detailsMode}`
+        const sort = `sort=${settings.sort}`
+        this.location.replaceState(`/?${destination}&${direction}&${detailsMode}&${sort}`);
     }
     
 

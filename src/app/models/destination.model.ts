@@ -6,6 +6,7 @@ export class DestinationModel {
     routeNumberDisplay: string;
     destinationName: string;
     type: string;
+    towardsCenter: boolean;
     expanded: boolean;
     routeList: Array<RouteModel>;
 }

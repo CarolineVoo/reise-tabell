@@ -113,6 +113,7 @@ export class DestinationOverviewComponent implements OnInit {
           routeNumberDisplay: this.setRouteNumberDisplay(routeData.LineRef),
           destinationName: destinationRoute.DestinationDisplay,
           type: this.setTypeOfVehicle(routeData.LineRef), 
+          towardsCenter: this.setTowardsCentrum(routeData),
           expanded: this.getSaveToggleData(routeData.LineRef, destinationRoute.DestinationDisplay),
           routeList: [this.setRouteModel(destinationRoute)]
         })
@@ -175,6 +176,25 @@ export class DestinationOverviewComponent implements OnInit {
     } else {
       return Constants.GREEN_BUSS
     }
+  }
+
+  private setTowardsCentrum(routeData: any): boolean {
+    let isTowardsCentrum = false;
+    let indexPositionCentrum = 0;
+    let indexPositionDestination = 0;
+    routeData.EstimatedCalls.EstimatedCall.forEach((route: any, index: number) => {
+      if(route.StopPointName === 'Jernbanetorget' || route.StopPointName === 'Oslo bussterminal' 
+      || route.StopPointName === 'Majorstuen' || route.StopPointName === 'Tollboden') {
+        indexPositionCentrum = index;
+      }
+      if(route.StopPointName === this.settings.destination) {
+        indexPositionDestination = index;
+      }
+    });
+    if(indexPositionCentrum > indexPositionDestination) {
+      isTowardsCentrum = true;
+    }
+    return isTowardsCentrum;
   }
 
   private sortDepartureDate() {
@@ -290,6 +310,9 @@ export class DestinationOverviewComponent implements OnInit {
       const queryParam: QueryParamModel = new QueryParamModel();
       if(params[Constants.QUERY_PARAM_DESTINATION]) {
         queryParam.destination = params[Constants.QUERY_PARAM_DESTINATION];
+      }
+      if(params[Constants.QUERY_PARAM_DIRECTION]) {
+        queryParam.direction = params[Constants.QUERY_PARAM_DIRECTION];
       }
       if(params[Constants.QUERY_PARAM_SORT]) {
         queryParam.sort = params[Constants.QUERY_PARAM_SORT];

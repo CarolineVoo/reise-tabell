@@ -44,9 +44,14 @@ export class SettingsComponent {
     location.reload();
   }
 
+  onChangeDirection(value: boolean): void {
+    this.settings.direction = value;
+    this.setSettings();
+  }
+
   onChangeDetailsMode(value: boolean): void {
     this.settings.detailsMode = value;
-    this.setSettings()
+    this.setSettings();
   }
 
   onChangeSortSelect(option: string): void {

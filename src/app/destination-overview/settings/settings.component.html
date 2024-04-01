@@ -7,7 +7,7 @@
         </div>
 
         <div class="settings__section">
-            <p class="settings__subtitle">Search</p>
+            <p class="settings__subtitle">Søk</p>
             <span class="settings__content--desetinations">
                 <p class="settings__description">Søk etter destinasjon</p>
                 <div class="settings__input">
@@ -20,7 +20,11 @@
         </div>
 
         <div class="settings__section">
-            <p class="settings__subtitle">Detaljer</p>
+            <p class="settings__subtitle">Visning</p>
+            <span class="settings__content">
+                <p class="settings__description">Del opp etter retning</p>
+                <toggle [toggle]="settings.direction" (toggleChange)="onChangeDirection($event)"></toggle>
+            </span>
             <span class="settings__content">
                 <p class="settings__description">Se mer detaljer på lista</p>
                 <toggle [toggle]="settings.detailsMode" (toggleChange)="onChangeDetailsMode($event)"></toggle>

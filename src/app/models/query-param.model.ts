@@ -1,5 +1,6 @@
 export class QueryParamModel {
-    destination?: string;
+    destination: string;
+    direction: string;
     detailsMode: string;
     sort: string;
 }
