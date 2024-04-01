@@ -1,35 +1,39 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DestinationModel } from 'src/app/models/destination.model';
 import DestinationsModel from 'src/app/models/destinations.model';
 
 @Component({
-  selector: 'destination-table-details',
-  templateUrl: './destination-table-details.component.html',
-  styleUrls: ['./destination-table-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'list-table-details',
+  templateUrl: './list-table-details.component.html',
+  styleUrls: ['./list-table-details.component.scss']
 })
-export class DestinationTableDetailsComponent {
+export class ListTableDetailsComponent {
+  destinationsData: DestinationsModel;
 
-  destinations: DestinationsModel;
-  isActive: boolean;
-
-  @Input() title: string;
-  @Input() type: string;
   @Input() vehicle: string;
-  @Input() direction: boolean;
+  @Input() directionEnabled: boolean;
+  @Input() centrumDirection: boolean;
+  @Input() destinations: DestinationsModel;
 
-  @Input() set destinationsData(value: string) {
-    if(!value) {
-      return;
+  public displayList(value: string, towardsCenter: boolean): boolean {
+    if(!this.directionEnabled && this.vehicle.includes(value)){
+      return true;
     }
-    this.destinations = JSON.parse(value);
-    this.isActive = this.setTableActive(this.destinations);
+
+    if(this.directionEnabled && this.centrumDirection == towardsCenter && this.vehicle.includes(value)) {
+      return true;
+    }
+
+    if(this.directionEnabled && !this.centrumDirection != towardsCenter && this.vehicle.includes(value)) {
+      return true;
+    }
+
+    return false;
   }
 
   public vehicleType(value: string): boolean {
     return this.vehicle.includes(value)
   }
-
 
   public expandDestinationItem(destinationValue: DestinationModel): void {
     const destination = this.destinations.destinations.find(x => x.routeID == destinationValue.routeID && x.destinationName == destinationValue.destinationName);
@@ -51,13 +55,4 @@ export class DestinationTableDetailsComponent {
     return Array(n); 
   } 
 
-  private setTableActive(destinations: DestinationsModel): boolean { 
-    let active = false;
-    destinations.destinations.forEach(route => {
-      if(this.vehicleType(route.type)){
-        active = true;
-      }
-    });
-    return active;
-  }
 }

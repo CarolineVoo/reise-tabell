@@ -1,0 +1,37 @@
+<div class="list-table-details">
+    <div *ngFor="let destination of destinations.destinations">
+        <div (click)="expandDestinationItem(destination)" class="list-table-details__board--item" *ngIf="displayList(destination.type, destination.towardsCenter)">
+            <div class="list-table-details__board--title">
+                <h2 class="list-table-details__board--destination-title">
+                    <span [class]="'list-table-details__board--pill-' + destination.type"> 
+                        {{destination.routeNumberDisplay}}
+                    </span> 
+                    <span [class]="'list-table-details__board--destination-name'">{{destination.destinationName}}</span>
+                </h2>
+            </div>
+            <div class="list-table-details__board--time">
+                {{destination.routeList[0].realTime}}
+            </div>
+            <div class="list-table-details__board--status">
+                <span [class]="'list-table-details__board--status-' + destination.routeList[0].departureStatus"></span>
+                {{destination.routeList[0].departureStatusDisplay}}
+            </div>
+            <div class="list-table-details__board--toggle">
+                <span [class]="!destination.expanded ? 'list-table-details__board--toggle-arrow' : 'list-table-details__board--toggle-arrow-expand'"></span>
+            </div>
+        </div>
+        <div *ngIf="destination.expanded && vehicleType(destination.type)" class="list-table-details__board--details">
+            <div class="list-table-details__board--details-time">
+                <span class="list-table-details__board--details-time--item">
+                    {{destination.routeList[0].realTime}}
+                </span>
+                <span class="list-table-details__board--details-time--item" *ngFor="let route of destination.routeList | slice:1:destination.routeList.length">
+                    {{route.realTime}}
+                </span>
+                <span  class="list-table-details_board--details-time--item" *ngFor="let n of appendEmptyTimes(5-destination.routeList.length)">
+                    -
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

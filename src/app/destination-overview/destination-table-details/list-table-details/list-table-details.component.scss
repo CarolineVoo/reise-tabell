@@ -1,0 +1,240 @@
+.list-table-details {
+    p, h2 {
+        margin: 0;
+    }
+
+    &__board {
+        &--item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 2px solid #20222e;
+            cursor: pointer;
+        }
+
+        &--pill {
+            display: inline-block;
+            width: 50px;
+            padding: 2px;
+            text-align: center;
+            border-radius: 4px;
+            margin-right: 3px;
+            &-tbane {
+                @extend .list-table-details__board--pill;
+                background-color: #ec700c;
+            }
+
+            &-redbuss {
+                @extend .list-table-details__board--pill;
+                background-color: #e60000;
+            }
+
+            &-greenbuss {
+                @extend .list-table-details__board--pill;
+                background-color: #76a300;
+            }
+
+            &-trikk {
+                @extend .list-table-details__board--pill;
+                background-color: #0973be;
+            }
+        }
+
+        &--title {
+            width: 40%;
+        }
+
+        &--destination-title {
+           display: flex;
+           align-items: center;
+       }
+
+       &--destination-name {
+           display: block;
+           margin-left: 9px;
+           width: 100%;
+       }
+
+        &--time {
+            width: 10%;
+        }
+
+        &--status {
+            width: 15%;
+
+            &-dot {
+                display: block;
+                width: 10px;
+                height: 10px;
+                border-radius: 100px;
+                float: left;
+                margin-top: 3px;
+                margin-right: 10px;
+            }
+            
+            &-delayed {
+                @extend .list-table-details__board--status-dot;
+                background-color: #ffff00;
+                box-shadow: 0 0 6px 0px #ffff00;
+                animation: delayedAnimation 2s infinite;
+            }
+
+            &-cancelled {
+                @extend .list-table-details__board--status-dot;
+                background-color: #d60000;
+                box-shadow: 0 0 6px 0px #d60000;
+                animation: cancelledAnimation 2s infinite;
+            }
+
+            &-onTime {
+                @extend .list-table-details__board--status-dot;
+                background-color: #00dc00;
+                box-shadow: 0 0 6px 0px #00dc00;
+                animation: onTimeAnimation 2s infinite;
+            }
+
+            @keyframes onTimeAnimation {
+                10% {
+                    box-shadow: 0 0 6px 0px #00dc00;
+                }
+                50% {
+                    box-shadow: 0 0 7px 1px #00dc00;
+                }
+                75% {
+                    box-shadow: 0 0 6px 0px #00dc00;
+                }
+            }
+
+            @keyframes delayedAnimation {
+                10% {
+                    box-shadow: 0 0 6px 0px #ffff00;
+                }
+                50% {
+                    box-shadow: 0 0 7px 1px #ffff00;
+                }
+                75% {
+                    box-shadow: 0 0 6px 0px #ffff00;
+                }
+            }
+
+            @keyframes cancelledAnimation {
+                10% {
+                    box-shadow: 0 0 6px 0px #d60000;
+                }
+                50% {
+                    box-shadow: 0 0 7px 1px #d60000;
+                }
+                75% {
+                    box-shadow: 0 0 6px 0px #d60000;
+                }
+            }
+        }
+
+        &--toggle {
+            &-arrow {
+                display: block;
+                background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 491.996 491.996" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="m484.132 124.986-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86-7.208 0-13.964 2.792-19.036 7.86l-183.84 183.848L62.056 108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968 2.788-19.036 7.856l-16.12 16.128c-10.496 10.488-10.496 27.572 0 38.06l219.136 219.924c5.064 5.064 11.812 8.632 19.084 8.632h.084c7.212 0 13.96-3.572 19.024-8.632l218.932-219.328c5.072-5.064 7.856-12.016 7.864-19.224 0-7.212-2.792-14.068-7.864-19.128z" fill="%23e5e8ff" opacity="1" data-original="%23000000" class=""></path></g></svg>');
+                background-size: cover;
+                width: 18px;
+                height: 18px;
+                margin-right: 10px;
+                //animation: closeRotate 0.5s;
+
+                &-expand{
+                    @extend .list-table-details__board--toggle-arrow;
+                    transform: rotate(180deg);
+                    //animation: openRotate 0.5s;
+                }
+
+                @keyframes openRotate {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(180deg);
+                    }
+                }
+
+                @keyframes closeRotate {
+                    0% {
+                        transform: rotate(180deg);
+                    }
+                    100% {
+                        transform: rotate(0deg);
+                    }
+                }
+
+            }
+            
+        }
+
+        &--details {
+            display: block; 
+            box-sizing: border-box;
+            padding: 12px 65px;
+            background-color: #12131c; 
+            width: 100%;
+            height: 300px; 
+            //animation: expandDetail 0.5s;
+
+            &-time {
+                display: flex;
+                justify-content: space-evenly;
+                width: 100%;
+                max-width: 650px;
+                margin: 0 auto;
+                &--item {
+                    display: block;
+                    padding: 6px 12px;
+                    background-color: #20222e;
+                    border-radius: 5px;
+                    font-size: 18px;
+                    text-align: center;
+                    width: 55px;
+                }
+            }
+        }
+
+        @keyframes expandDetail {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: 300px;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 550px) {
+       &__board  {
+           &--title {
+               font-size: 14px;
+           }
+           
+           &--destination-name {
+               font-size: 17px;
+           }
+
+           &--status {
+               width: 17%;
+           }
+
+           &--details {
+               &-time {
+                   &--item {
+                       font-size: 16px;
+                       padding: 6px 9px;
+                   }
+               }
+           }  
+           
+           &--toggle {
+               &-arrow {
+                   width: 12px;
+                   height: 12px;
+               }
+           }
+       }
+   }
+}

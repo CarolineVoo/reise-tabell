@@ -11,9 +11,9 @@
                 <destination-table-info [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-info>
             </ng-container>
             <ng-template #detailMode>
-                <destination-table-details [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON"></destination-table-details>
-                <destination-table-details [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON"></destination-table-details>
-                <destination-table-details [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON"></destination-table-details>
+                <destination-table-details [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-details>
+                <destination-table-details [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-details>
+                <destination-table-details [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-details>
             </ng-template>
         </div>
     </div>

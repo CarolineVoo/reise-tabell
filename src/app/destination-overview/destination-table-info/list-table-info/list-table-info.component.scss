@@ -2,21 +2,6 @@
     p, h2 {
         margin: 0;
     }
-    
-    &__direction {
-        &--title {
-            margin-top: 15px !important;
-            margin-bottom: 0px !important;
-            font-size: 22px;
-            font-weight: 200;
-            color: #484c64;
-
-            &_from {
-                @extend .list-table-info__direction--title;
-                margin-top: 30px !important;
-            }
-        }
-     }
  
      &__board {
          &--item {
@@ -174,12 +159,6 @@
     }
 
      @media only screen and (max-width: 550px) {
-
-        &__direction {
-            &--title {
-                font-size: 18px;
-            }
-         }
         &__board  {
             &--title {
                 font-size: 14px;

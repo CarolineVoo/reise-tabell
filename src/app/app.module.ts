@@ -14,6 +14,7 @@ import { ToggleComponent } from './shared/components/toggle/toggle.component';
 import { SelectComponent } from './shared/components/select/select.component';
 import { InputTextComponent } from './shared/components/input-text/input-text.component';
 import { ListTableInfoComponent } from './destination-overview/destination-table-info/list-table-info/list-table-info.component';
+import { ListTableDetailsComponent } from './destination-overview/destination-table-details/list-table-details/list-table-details.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ListTableInfoComponent } from './destination-overview/destination-table
     ToggleComponent,
     SelectComponent,
     InputTextComponent,
-    ListTableInfoComponent
+    ListTableInfoComponent,
+    ListTableDetailsComponent
   ],
   imports: [
     BrowserModule,
