@@ -42,5 +42,21 @@
                 <select-box [options]="sortOptions" [select]="settings.sort" (selectChange)="onChangeSortSelect($event)"></select-box>
             </span>
         </div>
+
+        <div class="settings__section settings__section--last">
+            <p class="settings__subtitle">Kjøretøy</p>
+            <span class="settings__content">
+                <p class="settings__description">Vis <strong>T-bane</strong> på lista</p>
+                <toggle [toggle]="settings.enableTbane" (toggleChange)="onChangeEnableTbane($event)"></toggle>
+            </span>
+            <span class="settings__content">
+                <p class="settings__description">Vis <strong>buss</strong> på lista</p>
+                <toggle [toggle]="settings.enableBuss" (toggleChange)="onChangeEnableBuss($event)"></toggle>
+            </span>
+            <span class="settings__content">
+                <p class="settings__description">Vis <strong>trikk</strong> på lista</p>
+                <toggle [toggle]="settings.enableTrikk" (toggleChange)="onChangeEnableTrikk($event)"></toggle>
+            </span>
+        </div>
     </div>
 </div>

@@ -5,6 +5,9 @@ export class Constants {
     public static MERGE_ROUTES = false;
     public static DETAILS_MODE = false;
     public static SORT = "realtime"
+    public static ENABLE_TBANE = true;
+    public static ENABLE_BUSS = true;
+    public static ENABLE_TRIKK = true;
 
     //QUERY PARAMETER
     public static QUERY_PARAM_DESTINATION = "destination";
@@ -12,6 +15,9 @@ export class Constants {
     public static QUERY_PARAM_MERGE_ROUTES = "mergeRoutes";
     public static QUERY_PARAM_DETAILS_MODE = "detailsMode";
     public static QUERY_PARAM_SORT= "sort";
+    public static QUERY_PARAM_ENABLE_TBANE = "enableTbane";
+    public static QUERY_PARAM_ENABLE_BUSS = "enableBuss";
+    public static QUERY_PARAM_ENABLE_TRIKK = "enableTrikk";
 
     //SERVICES
     public static LOADING_TIME = 300000;

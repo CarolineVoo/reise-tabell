@@ -64,6 +64,21 @@ export class SettingsComponent {
     this.setSettings();
   }
 
+  onChangeEnableTbane(value: boolean): void {
+    this.settings.enableTbane = value;
+    this.setSettings();
+  }
+
+  onChangeEnableBuss(value: boolean): void {
+    this.settings.enableBuss = value;
+    this.setSettings();
+  }
+
+  onChangeEnableTrikk(value: boolean): void {
+    this.settings.enableTrikk = value;
+    this.setSettings();
+  }
+
   onClickOutside() {
     if(this.boxElement) {
       this.renderer.setAttribute(this.boxElement.nativeElement, 'class', 'settings__box--close');

@@ -1,6 +1,6 @@
 <div class="list-table-info">
     <div *ngFor="let destination of destinations.destinations">
-        <div class="list-table-info__board--item" *ngIf="displayList(destination.type, destination.towardsCenter)">
+        <div class="list-table-info__board--item" *ngIf="displayList(destination.type, destination.towardsCenter) && destination.visible">
             <div class="list-table-info__board--title">
                 <h2 class="list-table-info__board--destination-title">
                     <span [class]="'list-table-info__board--pill-' + destination.type"> 

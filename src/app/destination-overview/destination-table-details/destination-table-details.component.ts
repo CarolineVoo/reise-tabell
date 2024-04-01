@@ -57,7 +57,7 @@ export class DestinationTableDetailsComponent {
   private setTableActive(destinations: DestinationsModel): boolean { 
     let active = false;
     destinations.destinations.forEach(route => {
-      if(this.vehicleType(route.type)){
+      if(this.vehicleType(route.type) && route.visible) {
         active = true;
       }
     });

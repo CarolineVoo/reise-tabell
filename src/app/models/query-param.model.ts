@@ -4,4 +4,7 @@ export class QueryParamModel {
     mergeRoutes: string;
     detailsMode: string;
     sort: string;
+    enableTbane: string;
+    enableBuss: string;
+    enableTrikk: string;
 }

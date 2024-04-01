@@ -4,4 +4,7 @@ export class SettingsModel {
     mergeRoutes: boolean;
     detailsMode: boolean;
     sort: string;
+    enableTbane: boolean;
+    enableBuss: boolean;
+    enableTrikk: boolean;
 }

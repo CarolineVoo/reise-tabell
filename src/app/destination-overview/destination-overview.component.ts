@@ -98,7 +98,7 @@ export class DestinationOverviewComponent implements OnInit {
       }
     });
     this.sortDepartureDate();
-    this.destinationsData = this.settingsService.sortDestination(this.settings.sort, this.destinationsData);
+    this.destinationsData = this.settingsService.sortDestination(this.settings, this.destinationsData);
     return this.destinationsData;
   }
 
@@ -114,6 +114,7 @@ export class DestinationOverviewComponent implements OnInit {
           destinationName: destinationRoute.DestinationDisplay,
           type: this.setTypeOfVehicle(routeData.LineRef), 
           towardsCenter: this.setTowardsCentrum(routeData),
+          visible: true,
           expanded: this.getSaveToggleData(routeData.LineRef, destinationRoute.DestinationDisplay),
           routeList: [this.setRouteModel(destinationRoute)]
         })
@@ -278,7 +279,7 @@ export class DestinationOverviewComponent implements OnInit {
       return;
     }
     this.settings = JSON.parse(event);
-    this.destinationsData = this.settingsService.sortDestination(this.settings.sort, this.destinationsData);
+    this.destinationsData = this.settingsService.sortDestination(this.settings, this.destinationsData);
     this.destinationDataJSON = JSON.stringify(this.destinationsData);
     this.settingsService.updateQueryString(this.settings);
   }
@@ -322,6 +323,15 @@ export class DestinationOverviewComponent implements OnInit {
       }
       if(params[Constants.QUERY_PARAM_SORT]) {
         queryParam.sort = params[Constants.QUERY_PARAM_SORT];
+      }
+      if(params[Constants.QUERY_PARAM_ENABLE_TBANE]) {
+        queryParam.enableTbane = params[Constants.QUERY_PARAM_ENABLE_TBANE];
+      }
+      if(params[Constants.QUERY_PARAM_ENABLE_BUSS]) {
+        queryParam.enableBuss = params[Constants.QUERY_PARAM_ENABLE_BUSS];
+      }
+      if(params[Constants.QUERY_PARAM_ENABLE_TRIKK]) {
+        queryParam.enableTrikk = params[Constants.QUERY_PARAM_ENABLE_TRIKK];
       }
       this.settings = this.settingsService.setSettings(queryParam);
     });
