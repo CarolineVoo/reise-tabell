@@ -21,4 +21,15 @@ export class DestinationsService {
           }
     }
 
+    // public async getDestinationsVYData():  Promise<any> {
+    //     const apiUrl = 'https://api.entur.io/realtime/v1/rest/et?datasetId=NSB';
+    //     try {
+    //         const destinationsData = this.http.get(apiUrl, { responseType: 'text' }).toPromise();
+    //         return destinationsData;
+    //     } catch (error) {
+    //         console.error('Error fetching data', error);
+    //         throw error;
+    //       }
+    // }
+
 }

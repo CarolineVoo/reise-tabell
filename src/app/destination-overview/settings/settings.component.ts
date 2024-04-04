@@ -15,12 +15,14 @@ export class SettingsComponent {
   public settingsModel: SettingsModel;
   public detailsMode: boolean;
   public sortOptions = this.settingsService.sortOptions;
+  public destinationSearchList: Array<string>;
 
   @Input() set settings(value: string) {
     if(!value) {
       return;
     }
     this.settingsModel = JSON.parse(value);
+    this.addDestinationSearchList(this.settingsModel.destination);
   }
   get settings(): SettingsModel {
     return this.settingsModel;
@@ -33,12 +35,16 @@ export class SettingsComponent {
     private renderer: Renderer2
   ) {}
 
-  onChangeDestination(value: string): void {
-    this.settingsModel.destination = value;
+  onChangeDestination(value: string, index: number): void { 
+    this.destinationSearchList[index] = value;
   }
 
+  trackByIndex(index: number, item: any) {
+    return index;
+}
+
   onClickSearchDestinations() {
-    this.settings.destination = this.settingsModel.destination;
+    this.settings.destination = this.destinationSearchList.toString();
     sessionStorage.setItem("settingsDate", JSON.stringify(this.settings));
     this.settingsService.updateQueryString(this.settings);
     location.reload();
@@ -92,5 +98,17 @@ export class SettingsComponent {
     const settingsJSON = JSON.stringify(this.settings);
     sessionStorage.setItem("settingsDate", JSON.stringify(this.settings));
     this.settingsChange.emit(settingsJSON);
+  }
+
+  private addDestinationSearchList(destinations: string): void {
+    this.destinationSearchList = destinations.split(",");
+  }
+
+  public appendMoreInputs(): void {
+    this.destinationSearchList.push('');
+  }
+
+  public removeInputs(index: number): void {
+    this.destinationSearchList.splice(index, 1); 
   }
 }

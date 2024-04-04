@@ -12,10 +12,17 @@
                 <p class="settings__description">Søk etter destinasjon</p>
                 <div class="settings__input">
                     <div class="settings__input--text">
-                        <input-text [text]="settings.destination" (textChange)="onChangeDestination($event)"></input-text>
+                        <input-text [text]="destinationSearchList[0]" (textChange)="onChangeDestination($event, 0)"></input-text>
                     </div>
                     <button class="settings__button--search" (click)="onClickSearchDestinations()">Søk</button>
                 </div>
+                <div *ngFor="let destinationInput of destinationSearchList; trackBy: trackByIndex; let i = index">
+                    <div class="settings__input--text" *ngIf="i > 0">
+                        <input-text [text]="destinationInput" (textChange)="onChangeDestination($event, i)"></input-text>
+                        <span class="settings__icon--trash" (click)="removeInputs(i)"></span>
+                    </div>
+                </div>
+                <button class="settings__button--add" (click)="appendMoreInputs()">+ Legg til destinasjon</button>
             </span>
         </div>
 
