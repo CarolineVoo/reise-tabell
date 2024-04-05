@@ -1,6 +1,7 @@
 <div class="list-table-details">
     <div *ngFor="let destination of destinations.destinations">
-        <div (click)="expandDestinationItem(destination)" class="list-table-details__board--item" *ngIf="displayList(destination.type, destination.towardsCenter) && destination.visible">
+        <div (click)="expandDestinationItem(destination)" class="list-table-details__board--item" 
+            *ngIf="displayList(destination.type, destination.towardsCenter) && destination.visible && travelFrom === destination.travelFrom">
             <div class="list-table-details__board--title">
                 <h2 class="list-table-details__board--destination-title">
                     <span [class]="'list-table-details__board--pill-' + destination.type"> 

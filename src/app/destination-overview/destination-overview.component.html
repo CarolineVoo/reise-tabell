@@ -1,32 +1,37 @@
 <div class="destination-overview" #overviewElement>
     <div *ngIf="!loading">
         <div class="destination-overview__header"> 
+            <!-- <h1 *ngIf="destinationList.length <= 1">{{settings.destination}}</h1> -->
             <h1>{{settings.destination}}</h1>
             <p (click)="settingsService.onClickSettings()" class="destination-overview__clock">{{getClock()}}</p>
         </div>
-        <div class="destination-overview__board">
-            <ng-container *ngIf="!settings.mergeRoutes; else mergeList">
-                <ng-container *ngIf="!settings.detailsMode; else detailMode">
-                    <destination-table-info [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-info>
-                    <destination-table-info [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-info>
-                    <destination-table-info [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-info>
+        <div *ngFor="let destination of destinationList">
+            <h1>{{destination}}</h1>
+            <div class="destination-overview__board">
+                <ng-container *ngIf="!settings.mergeRoutes; else mergeList">
+                    <ng-container *ngIf="!settings.detailsMode; else detailMode">
+                        <destination-table-info [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-info>
+                        <destination-table-info [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-info>
+                        <destination-table-info [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-info>
+                    </ng-container>
+                    <ng-template #detailMode>
+                        <destination-table-details [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-details>
+                        <destination-table-details [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-details>
+                        <destination-table-details [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-details>
+                    </ng-template>
                 </ng-container>
-                <ng-template #detailMode>
-                    <destination-table-details [title]="'T bane'" [type]="'tbane'" [vehicle]="'tbane' "[destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-details>
-                    <destination-table-details [title]="'Buss'" [type]="'buss'" [vehicle]="'redbuss|greenbuss'" [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-details>
-                    <destination-table-details [title]="'Trikk'" [type]="'trikk'" [vehicle]="'trikk'" [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-details>
+                <ng-template #mergeList>
+                    <ng-container *ngIf="!settings.detailsMode; else detailMode">
+                        <destination-table-info [destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-info>
+                    </ng-container>
+                    <ng-template #detailMode>
+                        <destination-table-details [destinationsData]="destinationDataJSON" [direction]="settings.direction" [travelFrom]="destination"></destination-table-details>
+                    </ng-template>
                 </ng-template>
-            </ng-container>
-            <ng-template #mergeList>
-                <ng-container *ngIf="!settings.detailsMode; else detailMode">
-                    <destination-table-info [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-info>
-                </ng-container>
-                <ng-template #detailMode>
-                    <destination-table-details [destinationsData]="destinationDataJSON" [direction]="settings.direction"></destination-table-details>
-                </ng-template>
-            </ng-template>
+            </div>
         </div>
-    </div>
+        </div>
+        
 </div>
 <settings 
     [settings]="settingsDataJSON"

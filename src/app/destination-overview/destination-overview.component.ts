@@ -23,7 +23,7 @@ export class DestinationOverviewComponent implements OnInit {
   settings: SettingsModel;
   settingsDataJSON: string;
   loading: boolean;
-  destination: string;
+  destinationList: Array<string>;
 
   constructor(
     public destinationsService: DestinationsService, 
@@ -50,6 +50,7 @@ export class DestinationOverviewComponent implements OnInit {
   private initDestinationModel() {
     this.destinationsData = new DestinationsModel;
     this.destinationsData.destinations = new Array<DestinationModel>;
+    this.destinationList = this.setDestinationList(this.settings.destination);
   }
 
   public async getDestinationsData() {
@@ -87,40 +88,44 @@ export class DestinationOverviewComponent implements OnInit {
     if(routeList.length <= 0) {
       return new DestinationsModel;
     }
-    this.resetRouteListForDestinations()
-    routeList.forEach((routes: any) => {
-      if(Array.isArray(routes.EstimatedCalls?.EstimatedCall)) {
-        routes?.EstimatedCalls?.EstimatedCall.forEach((x: any) => {
-          if(x.StopPointName == this.settings.destination) {
-            this.destinationsData = this.mapDestinationValue(routes, x);
-          }
-        });
-      }
+    this.resetRouteListForDestinations();
+    this.destinationList.forEach((travelFrom: string) => {
+      routeList.forEach((routes: any) => {
+        if(Array.isArray(routes.EstimatedCalls?.EstimatedCall)) {
+          routes?.EstimatedCalls?.EstimatedCall.forEach((x: any) => {
+            if(x.StopPointName == travelFrom) {
+              this.mapDestinationValue(routes, x);
+            }
+          });
+        }
+      });
     });
     this.sortDepartureDate();
     this.destinationsData = this.settingsService.sortDestination(this.settings, this.destinationsData);
     return this.destinationsData;
   }
 
-  private mapDestinationValue(routeData: any, destinationRoute: any): DestinationsModel {
-    let routeAlreadyExists = this.destinationsData.destinations.find(x => x.routeID === routeData.LineRef && x.destinationName === destinationRoute.DestinationDisplay);
+  private mapDestinationValue(routeData: any, destinationRoute: any): void {
+    let routeAlreadyExists = this.destinationsData.destinations.find(x => x.routeID === routeData.LineRef 
+      && x.destinationName === destinationRoute.DestinationDisplay && x.travelFrom === destinationRoute.StopPointName);
 
     if(this.isMinuteValid(destinationRoute.ExpectedDepartureTime)){
       if(!routeAlreadyExists) {
-        this.destinationsData.destinations.push({ 
+        this.destinationsData.destinations.push({
+          travelFrom: destinationRoute.StopPointName,
           routeID: routeData.LineRef,
           routeNumber: this.setRouteNumber(routeData.LineRef), 
           routeNumberDisplay: this.setRouteNumberDisplay(routeData.LineRef),
           destinationName: destinationRoute.DestinationDisplay,
           type: this.setTypeOfVehicle(routeData.LineRef), 
-          towardsCenter: this.setTowardsCentrum(routeData),
+          towardsCenter: this.setTowardsCentrum(routeData, destinationRoute.StopPointName),
           visible: true,
           expanded: this.getSaveToggleData(routeData.LineRef, destinationRoute.DestinationDisplay),
           routeList: [this.setRouteModel(destinationRoute)]
         })
       } else {
-        this.destinationsData.destinations.forEach( x => {
-          if(x.routeID === routeAlreadyExists?.routeID && x.destinationName === routeAlreadyExists?.destinationName) {
+        this.destinationsData.destinations.forEach(x => {
+          if(x.routeID === routeAlreadyExists?.routeID && x.destinationName === routeAlreadyExists?.destinationName && x.travelFrom === destinationRoute.StopPointName) {
             x.expanded = this.getSaveToggleData(routeData.LineRef, destinationRoute.DestinationDisplay);
             if(x.routeList.length >= 5) {
               return;
@@ -130,7 +135,6 @@ export class DestinationOverviewComponent implements OnInit {
         });
       }
     }
-    return this.destinationsData;
   }
 
   private setRouteModel(destinationRoute: any) {
@@ -179,7 +183,7 @@ export class DestinationOverviewComponent implements OnInit {
     }
   }
 
-  private setTowardsCentrum(routeData: any): boolean {
+  private setTowardsCentrum(routeData: any, travelFrom: string): boolean {
     let isTowardsCentrum = false;
     let indexPositionCentrum = 0;
     let indexPositionDestination = 0;
@@ -188,7 +192,7 @@ export class DestinationOverviewComponent implements OnInit {
       || route.StopPointName === 'Majorstuen' || route.StopPointName === 'Tollboden') {
         indexPositionCentrum = index;
       }
-      if(route.StopPointName === this.settings.destination) {
+      if(route.StopPointName === travelFrom) {
         indexPositionDestination = index;
       }
     });
@@ -337,4 +341,7 @@ export class DestinationOverviewComponent implements OnInit {
     });
   }
 
+  private setDestinationList(destinations: string): Array<string> {
+    return destinations.split(',');
+  }
 }

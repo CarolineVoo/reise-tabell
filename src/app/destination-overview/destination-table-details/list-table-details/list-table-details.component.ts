@@ -14,6 +14,7 @@ export class ListTableDetailsComponent {
   @Input() directionEnabled: boolean;
   @Input() centrumDirection: boolean;
   @Input() destinations: DestinationsModel;
+  @Input() travelFrom: string;
 
   public displayList(value: string, towardsCenter: boolean): boolean {
     if(this.directionEnabled && this.centrumDirection == towardsCenter && !this.vehicle) {

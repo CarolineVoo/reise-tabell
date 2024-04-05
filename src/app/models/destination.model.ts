@@ -1,6 +1,7 @@
 import { RouteModel } from "./route.model";
 
 export class DestinationModel {
+    travelFrom: string;
     routeID: string;
     routeNumber: number;
     routeNumberDisplay: string;

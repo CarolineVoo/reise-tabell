@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DestinationModel } from 'src/app/models/destination.model';
 import DestinationsModel from 'src/app/models/destinations.model';
 
@@ -8,7 +8,7 @@ import DestinationsModel from 'src/app/models/destinations.model';
   styleUrls: ['./destination-table-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DestinationTableDetailsComponent {
+export class DestinationTableDetailsComponent implements OnInit{
 
   destinations: DestinationsModel;
   isActive: boolean;
@@ -17,12 +17,16 @@ export class DestinationTableDetailsComponent {
   @Input() type: string;
   @Input() vehicle: string;
   @Input() direction: boolean;
+  @Input() travelFrom: string;
 
   @Input() set destinationsData(value: string) {
     if(!value) {
       return;
     }
     this.destinations = JSON.parse(value);
+  }
+
+  ngOnInit(): void {
     this.isActive = this.setTableActive(this.destinations);
   }
 
@@ -57,7 +61,7 @@ export class DestinationTableDetailsComponent {
   private setTableActive(destinations: DestinationsModel): boolean { 
     let active = false;
     destinations.destinations.forEach(route => {
-      if(this.vehicleType(route.type) && route.visible) {
+      if(this.vehicleType(route.type) && route.visible && route.travelFrom == this.travelFrom) {
         active = true;
       }
     });

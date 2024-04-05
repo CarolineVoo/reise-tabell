@@ -5,14 +5,14 @@
     </div>
     <div [class]="'destination-table-info__item'">
         <ng-container *ngIf="!direction; else showDirection">
-            <list-table-info [vehicle]="vehicle" [destinations]="destinations"></list-table-info>
+            <list-table-info [vehicle]="vehicle" [destinations]="destinations" [travelFrom]="travelFrom"></list-table-info>
         </ng-container>
         <ng-template #showDirection>
             <h2 class="destination-table-info__direction--title">Retning mot sentrum</h2>
-            <list-table-info [vehicle]="vehicle" [destinations]="destinations" [directionEnabled]="true" [centrumDirection]="true"></list-table-info>
+            <list-table-info [vehicle]="vehicle" [destinations]="destinations" [travelFrom]="travelFrom" [directionEnabled]="true" [centrumDirection]="true"></list-table-info>
 
             <h2 class="destination-table-info__direction--title_from">Retning fra sentrum</h2>
-            <list-table-info [vehicle]="vehicle" [destinations]="destinations" [directionEnabled]="true" [centrumDirection]="false"></list-table-info>
+            <list-table-info [vehicle]="vehicle" [destinations]="destinations" [travelFrom]="travelFrom" [directionEnabled]="true" [centrumDirection]="false"></list-table-info>
           </ng-template>
     </div>
 </div> 
