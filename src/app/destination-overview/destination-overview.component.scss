@@ -41,11 +41,6 @@
 
     &__title {
         height: 35px;
-
-        &--hide {
-            @extend .destination-overview__title;
-            color: transparent;
-        }
     }
 
     &__zoom {

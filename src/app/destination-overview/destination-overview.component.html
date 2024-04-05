@@ -1,8 +1,8 @@
 <div class="destination-overview" #overviewElement>
     <div *ngIf="!loading">
         <div class="destination-overview__header"> 
-            <h1 [class]="destinationList.length <= 1 ? 'destination-overview__title' : 'destination-overview__title--hide'"> 
-                {{settings.destination}}
+            <h1 class="destination-overview__title"> 
+                {{destinationList.length <= 1 ? settings.destination : ''}}
             </h1>
             <p (click)="settingsService.onClickSettings()" class="destination-overview__clock">{{getClock()}}</p>
         </div>
