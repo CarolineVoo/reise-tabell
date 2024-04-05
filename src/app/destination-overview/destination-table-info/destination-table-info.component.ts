@@ -23,6 +23,7 @@ export class DestinationTableInfoComponent implements OnInit {
       return;
     }
     this.destinations = JSON.parse(value);
+    this.isActive = this.setTableActive(this.destinations);
   }
 
   ngOnInit(): void {

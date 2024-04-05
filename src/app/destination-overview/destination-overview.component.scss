@@ -39,6 +39,15 @@
         justify-content: space-between;
     }
 
+    &__title {
+        height: 35px;
+
+        &--hide {
+            @extend .destination-overview__title;
+            color: transparent;
+        }
+    }
+
     &__zoom {
         &--large {
              @extend .destination-overview;
