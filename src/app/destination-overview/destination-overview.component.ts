@@ -56,8 +56,9 @@ export class DestinationOverviewComponent implements OnInit {
   public async getDestinationsData() {
     try {
       const data = await this.destinationsService.getDestinationsData();
-      const json = await this.convertXmlToJson(data);
-      this.destinationsData = this.getRuterData(json);
+      this.destinationsData = this.getRuterData(data);
+      console.log(data);
+  
       this.destinationDataJSON = JSON.stringify(this.destinationsData);
       this.settingsDataJSON = JSON.stringify(this.settings);
     } catch (error) {
@@ -70,20 +71,9 @@ export class DestinationOverviewComponent implements OnInit {
     }
   }
 
-  private convertXmlToJson(xmlData: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      xml2js.parseString(xmlData, { explicitArray: false }, (error, result) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result);
-        }
-      });
-    });
-  }
 
   private getRuterData(data: any): DestinationsModel{
-    const routeList = data.Siri?.ServiceDelivery?.EstimatedTimetableDelivery?.EstimatedJourneyVersionFrame?.EstimatedVehicleJourney;
+    const routeList = data;
 
     if(routeList.length <= 0) {
       return new DestinationsModel;
@@ -107,7 +97,7 @@ export class DestinationOverviewComponent implements OnInit {
 
   private mapDestinationValue(routeData: any, destinationRoute: any): void {
     let routeAlreadyExists = this.destinationsData.destinations.find(x => x.routeID === routeData.LineRef 
-      && x.destinationName === destinationRoute.DestinationDisplay && x.travelFrom === destinationRoute.StopPointName);
+      && (x.destinationName === destinationRoute.DestinationDisplay || x.destinationName === routeData.DestinationName) && x.travelFrom === destinationRoute.StopPointName);
 
     if(this.isMinuteValid(destinationRoute.ExpectedDepartureTime)){
       if(!routeAlreadyExists) {
@@ -116,7 +106,7 @@ export class DestinationOverviewComponent implements OnInit {
           routeID: routeData.LineRef,
           routeNumber: this.setRouteNumber(routeData.LineRef), 
           routeNumberDisplay: this.setRouteNumberDisplay(routeData.LineRef),
-          destinationName: destinationRoute.DestinationDisplay,
+          destinationName: destinationRoute.DestinationDisplay ? destinationRoute.DestinationDisplay : routeData.DestinationName,
           type: this.setTypeOfVehicle(routeData.LineRef), 
           towardsCenter: this.setTowardsCentrum(routeData, destinationRoute.StopPointName),
           visible: true,
@@ -189,7 +179,7 @@ export class DestinationOverviewComponent implements OnInit {
     let indexPositionDestination = 0;
     routeData.EstimatedCalls.EstimatedCall.forEach((route: any, index: number) => {
       if(route.StopPointName === 'Jernbanetorget' || route.StopPointName === 'Oslo bussterminal' 
-      || route.StopPointName === 'Majorstuen' || route.StopPointName === 'Tollboden') {
+      || route.StopPointName === 'Majorstuen' || route.StopPointName === 'Tollboden' || route.StopPointName === 'Oslo S') {
         indexPositionCentrum = index;
       }
       if(route.StopPointName === travelFrom) {

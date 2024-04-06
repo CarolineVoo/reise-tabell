@@ -28,6 +28,8 @@ export class Constants {
     public static RED_BUSS = "redbuss";
     public static GREEN_BUSS = "greenbuss";
     public static TRIKK = "trikk";
+    public static TOG = "tog";
+    public static FLY_TOG = "flytog";
 
     public static STATUS_ON_TIME = "onTime";
     public static STATUS_DELAYED = "delayed";
