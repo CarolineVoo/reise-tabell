@@ -29,7 +29,8 @@ export class SettingsService {
             sort: queryParam.sort ? queryParam.sort : Constants.SORT,
             enableTbane: queryParam.enableTbane ? Boolean(queryParam.enableTbane): Constants.ENABLE_TBANE,
             enableBuss: queryParam.enableBuss ? Boolean(queryParam.enableBuss): Constants.ENABLE_BUSS,
-            enableTrikk: queryParam.enableTrikk ? Boolean(queryParam.enableTrikk): Constants.ENABLE_TRIKK
+            enableTrikk: queryParam.enableTrikk ? Boolean(queryParam.enableTrikk): Constants.ENABLE_TRIKK,
+            enableTog: queryParam.enableTog ? Boolean(queryParam.enableTog): Constants.ENABLE_TOG
         }
         return settings;
     }
@@ -72,7 +73,8 @@ export class SettingsService {
             sort: queryParam.sort ? queryParam.sort : settingsData.sort,
             enableTbane: queryParam.enableTbane == 'true' ? true : (queryParam.enableTbane == 'false') ? false : settingsData.enableTbane,
             enableBuss: queryParam.enableBuss == 'true' ? true : (queryParam.enableBuss == 'false') ? false : settingsData.enableBuss,
-            enableTrikk: queryParam.enableTrikk == 'true' ? true : (queryParam.enableTrikk == 'false') ? false : settingsData.enableTrikk
+            enableTrikk: queryParam.enableTrikk == 'true' ? true : (queryParam.enableTrikk == 'false') ? false : settingsData.enableTrikk,
+            enableTog: queryParam.enableTog == 'true' ? true : (queryParam.enableTog == 'false') ? false : settingsData.enableTog
         }
         return settings;
     }
@@ -118,6 +120,9 @@ export class SettingsService {
             if(destination.type == Constants.TRIKK) {
                 destination.visible = settings.enableTrikk;
             }
+            if(destination.type == Constants.TOG) {
+                destination.visible = settings.enableTog;
+            }
         });
     
         return destinationData;
@@ -144,8 +149,9 @@ export class SettingsService {
         const enableTbane = `enableTbane=${settings.enableTbane}`
         const enableBuss = `enableBuss=${settings.enableBuss}`
         const enableTrikk = `enableTrikk=${settings.enableTrikk}`
+        const enableTog = `enableTog=${settings.enableTog}`
 
-        this.location.replaceState(`/?${destination}&${direction}&${mergeRoutes}&${detailsMode}&${sort}&${enableTbane}&${enableBuss}&${enableTrikk}`);
+        this.location.replaceState(`/?${destination}&${direction}&${mergeRoutes}&${detailsMode}&${sort}&${enableTbane}&${enableBuss}&${enableTrikk}&${enableTog}`);
     }
     
 

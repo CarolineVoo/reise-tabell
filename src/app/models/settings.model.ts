@@ -7,4 +7,5 @@ export class SettingsModel {
     enableTbane: boolean;
     enableBuss: boolean;
     enableTrikk: boolean;
+    enableTog: boolean;
 }

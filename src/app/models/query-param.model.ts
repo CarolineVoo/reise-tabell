@@ -7,4 +7,5 @@ export class QueryParamModel {
     enableTbane: string;
     enableBuss: string;
     enableTrikk: string;
+    enableTog: string;
 }

@@ -46,7 +46,7 @@
                     background-color: #DF2027;
                 }
 
-                &-RE {
+                &-RE, &-RX {
                     @extend .list-table-info__board--pill;
                     width: 70px;
                     background-color: #10A8B2;

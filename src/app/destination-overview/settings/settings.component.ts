@@ -85,6 +85,11 @@ export class SettingsComponent {
     this.setSettings();
   }
 
+  onChangeEnableTog(value: boolean): void {
+    this.settings.enableTog = value;
+    this.setSettings();
+  }
+
   onClickOutside() {
     if(this.boxElement) {
       this.renderer.setAttribute(this.boxElement.nativeElement, 'class', 'settings__box--close');

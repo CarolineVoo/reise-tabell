@@ -97,7 +97,7 @@ export class DestinationOverviewComponent implements OnInit {
     let routeAlreadyExists = this.destinationsData.destinations.find(x => x.routeID === routeData.LineRef 
       && (x.destinationName === destinationRoute.DestinationDisplay || x.destinationName === routeData.DestinationName) && x.travelFrom === destinationRoute.StopPointName);
 
-    if(this.isMinuteValid(destinationRoute.ExpectedDepartureTime)){
+    if(this.isMinuteValid(destinationRoute.ExpectedDepartureTime) && this.isDateValid(destinationRoute.ExpectedDepartureTime)){
       if(!routeAlreadyExists) {
         this.destinationsData.destinations.push({
           travelFrom: destinationRoute.StopPointName,
@@ -143,6 +143,17 @@ export class DestinationOverviewComponent implements OnInit {
     if(Number(routeNumber) > 2000) {
       return Number(routeNumber.slice(2,4));
     } 
+
+    if(isNaN(Number(routeNumber))) {
+      let numberClass = [];
+      for(let i = 0; routeNumber.length > i; i++) {
+        if(!isNaN(Number(routeNumber[i]))) {
+          numberClass.push(routeNumber[i]);
+        }
+      }
+      return Number(numberClass.join(''));
+    }
+
     return Number(routeNumber);
   }
 
@@ -244,6 +255,16 @@ export class DestinationOverviewComponent implements OnInit {
     const diffMs = expectedTime - today;
     const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
     if(diffMins < 0) {
+      return false;
+    }
+    return true;
+  }
+
+  private isDateValid(expectedDepartureTime: string): boolean {
+    const today = new Date()
+    const expectedTime = new Date(expectedDepartureTime)
+
+    if((today.getDay() < expectedTime.getDay() || today.getMonth() < expectedTime.getMonth()) && expectedTime.getHours() > 4) {
       return false;
     }
     return true;

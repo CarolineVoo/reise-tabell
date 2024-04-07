@@ -94,5 +94,4 @@ export class DestinationsService {
       })
       return destinationData;
     }
-
 }

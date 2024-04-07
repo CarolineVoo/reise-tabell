@@ -8,6 +8,7 @@ export class Constants {
     public static ENABLE_TBANE = true;
     public static ENABLE_BUSS = true;
     public static ENABLE_TRIKK = true;
+    public static ENABLE_TOG = true;
 
     //QUERY PARAMETER
     public static QUERY_PARAM_DESTINATION = "destination";

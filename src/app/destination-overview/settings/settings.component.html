@@ -64,6 +64,10 @@
                 <p class="settings__description">Vis <strong>trikk</strong> på lista</p>
                 <toggle [toggle]="settings.enableTrikk" (toggleChange)="onChangeEnableTrikk($event)"></toggle>
             </span>
+            <span class="settings__content">
+                <p class="settings__description">Vis <strong>tog</strong> på lista</p>
+                <toggle [toggle]="settings.enableTog" (toggleChange)="onChangeEnableTog($event)"></toggle>
+            </span>
         </div>
     </div>
 </div>
