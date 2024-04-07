@@ -4,7 +4,7 @@
             && destination.visible && travelFrom === destination.travelFrom">
             <div class="list-table-info__board--title">
                 <h2 class="list-table-info__board--destination-title">
-                    <span [class]="'list-table-info__board--pill-' + destination.type"> 
+                    <span [class]="'list-table-info__board--pill-' + destination.type + pillStyle(destination.routeNumberDisplay)"> 
                         {{destination.routeNumberDisplay}}
                     </span> 
                     <span [class]="'list-table-info__board--destination-name'">{{destination.destinationName}}</span>

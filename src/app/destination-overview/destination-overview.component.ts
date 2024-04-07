@@ -56,9 +56,7 @@ export class DestinationOverviewComponent implements OnInit {
   public async getDestinationsData() {
     try {
       const data = await this.destinationsService.getDestinationsData();
-      this.destinationsData = this.getRuterData(data);
-      console.log(data);
-  
+      this.destinationsData = this.getRuterData(data);  
       this.destinationDataJSON = JSON.stringify(this.destinationsData);
       this.settingsDataJSON = JSON.stringify(this.settings);
     } catch (error) {
@@ -168,9 +166,17 @@ export class DestinationOverviewComponent implements OnInit {
       return Constants.TRIKK
     }else if(Number(routeNumber) < 100 || Number(routeNumber) > 2000) {
       return Constants.RED_BUSS
-    } else {
+    } else if(Number(routeNumber) > 99 || Number(routeNumber) < 500) {
       return Constants.GREEN_BUSS
+    } else if(isNaN(Number(routeNumber))) {
+      if(routeNumber.includes("FLY")) {
+        return Constants.FLY_TOG;
+      } else {
+        return Constants.TOG;
+      }
     }
+
+    return Constants.TRIKK
   }
 
   private setTowardsCentrum(routeData: any, travelFrom: string): boolean {

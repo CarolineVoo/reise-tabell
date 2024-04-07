@@ -4,7 +4,7 @@
             *ngIf="displayList(destination.type, destination.towardsCenter) && destination.visible && travelFrom === destination.travelFrom">
             <div class="list-table-details__board--title">
                 <h2 class="list-table-details__board--destination-title">
-                    <span [class]="'list-table-details__board--pill-' + destination.type"> 
+                    <span [class]="'list-table-details__board--pill-' + destination.type + pillStyle(destination.routeNumberDisplay)"> 
                         {{destination.routeNumberDisplay}}
                     </span> 
                     <span [class]="'list-table-details__board--destination-name'">{{destination.destinationName}}</span>

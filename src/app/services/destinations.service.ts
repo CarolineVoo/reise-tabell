@@ -38,15 +38,17 @@ export class DestinationsService {
         const apiRUTUrl = 'https://api.entur.io/realtime/v1/rest/et?datasetId=RUT';
         const apiVYUrl = 'https://api.entur.io/realtime/v1/rest/et?datasetId=BNR';
         try {
-            const [data1, data2] = await Promise.all([
-              this.fetchAndConvertXmlToJson(apiRUTUrl),
-              this.fetchAndConvertXmlToJson(apiVYUrl)
-            ]);
+          const [data1, data2] = await Promise.all([
+            this.fetchAndConvertXmlToJson(apiRUTUrl),
+            this.fetchAndConvertXmlToJson(apiVYUrl)
+          ]);
 
-            const mergedDData = [...data1.Siri.ServiceDelivery.EstimatedTimetableDelivery.EstimatedJourneyVersionFrame.EstimatedVehicleJourney, 
+          let data = [...data1.Siri.ServiceDelivery.EstimatedTimetableDelivery.EstimatedJourneyVersionFrame.EstimatedVehicleJourney, 
                 ...data2.Siri.ServiceDelivery.EstimatedTimetableDelivery.EstimatedJourneyVersionFrame.EstimatedVehicleJourney];
+
+          data = this.setActiveTransports(data);
             
-            return mergedDData;
+          return data;
 
         } catch (error) {
             throw new Error('Error fetching data: ' + error);
@@ -55,29 +57,42 @@ export class DestinationsService {
     }
 
     private async fetchAndConvertXmlToJson(url: string): Promise<any> {
-        try {
-            const response = await this.http.get(url, { responseType: 'text' }).toPromise();
-            if (typeof response === 'string') {
-              return this.convertXmlToJson(response);
-            } else {
-              throw new Error('Response is not a string');
-            }
-          } catch (error) {
-            throw new Error('API error: ' + error);
+      try {
+        const response = await this.http.get(url, { responseType: 'text' }).toPromise();
+        if (typeof response === 'string') {
+          return this.convertXmlToJson(response);
+        } else {
+          throw new Error('Response is not a string');
+        }
+      } catch (error) {
+        throw new Error('API error: ' + error);
+      }
+    }
+
+
+    private convertXmlToJson(xmlString: string): Promise<any> {
+      return new Promise((resolve, reject) => {
+        xml2js.parseString(xmlString, { explicitArray: false }, (error, result) => {
+          if (error) {
+            reject('Error parsing XML: ' + error);
+          } else {
+            resolve(result);
           }
-      }
-
-
-      private convertXmlToJson(xmlString: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-          xml2js.parseString(xmlString, { explicitArray: false }, (error, result) => {
-            if (error) {
-              reject('Error parsing XML: ' + error);
-            } else {
-              resolve(result);
-            }
-          });
         });
-      }
+      });
+    }
+
+    private setActiveTransports(data: any): any{
+      let destinationData = new Array;
+      data.forEach((destination: any) => {
+        if(destination.DataSource === "RUT" || destination.OperatorRef === "VY") { //OperatorRef FLY
+          destinationData.push(destination);
+        }
+        // if(destination.OperatorRef === "GAG" || destination.OperatorRef === "VYT" || destination.OperatorRef === "FLY") {
+        //   return;
+        // }
+      })
+      return destinationData;
+    }
 
 }

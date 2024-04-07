@@ -34,4 +34,5 @@ export class Constants {
     public static STATUS_ON_TIME = "onTime";
     public static STATUS_DELAYED = "delayed";
     public static STATUS_CANCELLED = "cancelled";
+
 }

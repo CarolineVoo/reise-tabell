@@ -51,4 +51,21 @@ export class ListTableInfoComponent {
     return Array(n); 
   } 
 
+  public pillStyle(routeNumber: string): string {
+    if(!isNaN(Number(routeNumber[0]))) {
+      return '';
+    }
+
+    let numberClass = [];
+
+    for(let i = 0; routeNumber.length > i; i++) {
+      if(isNaN(Number(routeNumber[i]))) {
+        numberClass.push(routeNumber[i]);
+      }
+    }
+
+    return `-${numberClass.join('')}`;
+
+  }
+
 }

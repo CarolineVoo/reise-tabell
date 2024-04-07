@@ -39,6 +39,26 @@
                 @extend .list-table-details__board--pill;
                 background-color: #0973be;
             }
+            
+            &-tog {
+                &-R {
+                    @extend .list-table-details__board--pill;
+                    width: 70px;
+                    background-color: #C34C4C;
+                }
+
+                &-RE {
+                    @extend .list-table-details__board--pill;
+                    width: 70px;
+                    background-color: #10A8B2;
+                }
+
+                &-L {
+                    @extend .list-table-details__board--pill;
+                    width: 70px;
+                    background-color: #65B152;
+                }
+            }
         }
 
         &--title {
