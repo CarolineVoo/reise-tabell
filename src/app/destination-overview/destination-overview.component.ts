@@ -97,7 +97,7 @@ export class DestinationOverviewComponent implements OnInit {
     let routeAlreadyExists = this.destinationsData.destinations.find(x => x.routeID === routeData.LineRef 
       && (x.destinationName === destinationRoute.DestinationDisplay || x.destinationName === routeData.DestinationName) && x.travelFrom === destinationRoute.StopPointName);
 
-    if(this.isMinuteValid(destinationRoute.ExpectedDepartureTime) && this.isDateValid(destinationRoute.ExpectedDepartureTime)){
+    if(this.isMinuteValid(destinationRoute.ExpectedDepartureTime) && this.isDateValid(destinationRoute.ExpectedDepartureTime, destinationRoute.DepartureStatus)){
       if(!routeAlreadyExists) {
         this.destinationsData.destinations.push({
           travelFrom: destinationRoute.StopPointName,
@@ -214,7 +214,7 @@ export class DestinationOverviewComponent implements OnInit {
       return;
     }
     this.destinationsData.destinations.forEach(destination => {
-      destination.routeList.sort((b, a) => new Date(b.aimedArrivalTime).getTime() - new Date(a.aimedArrivalTime).getTime());
+      destination.routeList.sort((b, a) => new Date(b.aimedDepartureTime).getTime() - new Date(a.aimedDepartureTime).getTime());
     });
   }
 
@@ -236,7 +236,7 @@ export class DestinationOverviewComponent implements OnInit {
     const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
     const diffSecs = Math.floor((((diffMs % 86400000) % 3600000) % 60000) / 1000);
 
-    if(diffMins == 0 && diffSecs <= 40 ) {
+    if(diffMins == 0 && diffSecs <= 50) {
       return 'nå';
     }
 
@@ -260,13 +260,21 @@ export class DestinationOverviewComponent implements OnInit {
     return true;
   }
 
-  private isDateValid(expectedDepartureTime: string): boolean {
+  private isDateValid(expectedDepartureTime: string, status: string): boolean {
     const today = new Date()
     const expectedTime = new Date(expectedDepartureTime)
+    if(!status) {
+      return false;
+    }
+
+    if(!expectedDepartureTime && status != Constants.STATUS_CANCELLED) {
+      return false;
+    }
 
     if((today.getDay() < expectedTime.getDay() || today.getMonth() < expectedTime.getMonth()) && expectedTime.getHours() > 4) {
       return false;
     }
+    
     return true;
   }
 
