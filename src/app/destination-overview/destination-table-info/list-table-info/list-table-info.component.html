@@ -12,7 +12,7 @@
             </div>
             
             <div class="list-table-info__board--time">
-                <div class="list-table-info__board--time--item" *ngFor="let route of destination.routeList | slice:0:3">
+                <div (click)="expandDestinationItem(destination, i)" class="list-table-info__board--time--item" *ngFor="let route of destination.routeList | slice:0:3; let i = index">
                     {{route.realTime}}
                     <span *ngIf="route.departureStatus == 'cancelled'" > - </span>
                 </div>
@@ -25,6 +25,8 @@
                 <span [class]="'list-table-info__board--status-' + destination.routeList[0].departureStatus"></span>
             </div>
         </div>
+        <div *ngIf="destination.expanded && displayList(destination.type, destination.towardsCenter)" class="list-table-info__details">
+            {{destination.routeNumberDisplay}} {{destination.routeNumber}} {{destination.destinationName}}
+        </div>
     </div>
-
 </div>

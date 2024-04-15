@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DestinationModel } from 'src/app/models/destination.model';
 import DestinationsModel from 'src/app/models/destinations.model';
 
 @Component({
@@ -66,6 +67,20 @@ export class ListTableInfoComponent {
 
     return `-${numberClass.join('')}`;
 
+  }
+
+  public expandDestinationItem(destinationValue: DestinationModel, index: number): void {
+    //this.resetExpand(index);
+    const destination = this.destinations.destinations.find(x => x.routeID == destinationValue.routeID && x.destinationName == destinationValue.destinationName);
+    if(destination) {
+      destination.expanded = !destination.expanded;
+    }
+  }
+
+  private resetExpand(index: number): void {
+    this.destinations.destinations.forEach(x => {
+      x.expanded = false;
+    })
   }
 
 }
