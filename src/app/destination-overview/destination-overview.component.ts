@@ -90,6 +90,7 @@ export class DestinationOverviewComponent implements OnInit {
     });
     this.sortDepartureDate();
     this.destinationsData = this.settingsService.sortDestination(this.settings, this.destinationsData);
+    this.validateHours();
     return this.destinationsData;
   }
 
@@ -218,6 +219,24 @@ export class DestinationOverviewComponent implements OnInit {
     });
   }
 
+  private validateHours() {
+    if(this.destinationsData.destinations.length <= 0) {
+      return;
+    }
+    this.destinationsData.destinations.forEach(destination => {
+      destination.routeList.forEach((route: any, index: number) => {
+        if(index == 0) {
+          const today = new Date();
+          const expectedTime = new Date(route.expectedDepartureTime);
+          today.setMinutes(today.getMinutes() + 90);
+          if(today < expectedTime) {
+            destination.visible = false;
+          }
+        }
+      });
+    });
+  }
+
   private resetRouteListForDestinations(): void {
     this.destinationsData.destinations.forEach(destination => {
       destination.routeList = [];
@@ -271,8 +290,8 @@ export class DestinationOverviewComponent implements OnInit {
       return false;
     }
 
-    if((today.getDay() < expectedTime.getDay() || today.getMonth() < expectedTime.getMonth()) && expectedTime.getHours() > 4) {
-      return false;
+    if((today.getDay() < expectedTime.getDay() || today.getMonth() < expectedTime.getMonth()) && expectedTime.getHours() > 3) {
+        return false;
     }
     
     return true;
