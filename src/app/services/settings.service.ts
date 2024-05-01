@@ -129,7 +129,7 @@ export class SettingsService {
       }
 
     private sortAfterRealTime(destinationData: DestinationsModel)  {
-        return destinationData.destinations.sort((b, a) => new Date(b.routeList[0].expectedDepartureTime).getTime() - new Date(a.routeList[0].expectedDepartureTime).getTime());
+        return destinationData.destinations.sort((b, a) => new Date(b.routeList[0]?.expectedDepartureTime).getTime() - new Date(a.routeList[0]?.expectedDepartureTime).getTime());
     }
     
     private sortAfterRouteID(destinationData: DestinationsModel) {
