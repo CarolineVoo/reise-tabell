@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { Location } from '@angular/common';
 import { AppComponent } from './app.component';
@@ -17,25 +17,18 @@ import { ListTableInfoComponent } from './destination-overview/destination-table
 import { ListTableDetailsComponent } from './destination-overview/destination-table-details/list-table-details/list-table-details.component';
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    DestinationOverviewComponent,
-    SettingsComponent,
-    DestinationTableDetailsComponent,
-    DestinationTableInfoComponent,
-    ToggleComponent,
-    SelectComponent,
-    InputTextComponent,
-    ListTableInfoComponent,
-    ListTableDetailsComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
-  providers: [DestinationsService, SettingsService],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        DestinationOverviewComponent,
+        SettingsComponent,
+        DestinationTableDetailsComponent,
+        DestinationTableInfoComponent,
+        ToggleComponent,
+        SelectComponent,
+        InputTextComponent,
+        ListTableInfoComponent,
+        ListTableDetailsComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule], providers: [DestinationsService, SettingsService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
