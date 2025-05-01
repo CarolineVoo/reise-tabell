@@ -81,13 +81,14 @@
              justify-content: space-between;
 
              &--item {
+                position: relative;
                 display: block;
-                padding: 6px 12px;
+                padding: 6px 8px 6px 18px;
                 background-color: #20222e;
                 border-radius: 5px;
                 font-size: 18px;
                 text-align: center;
-                width: 55px;
+                width: 65px;
             }
          }
 
@@ -101,13 +102,13 @@
              width: 3%;
  
              &-dot {
+                 position: absolute;
+                 top: 12px;
+                 left: 10px;
                  display: block;
-                 width: 10px;
-                 height: 10px;
+                 width: 8px;
+                 height: 8px;
                  border-radius: 100px;
-                 float: left;
-                 margin-top: 3px;
-                 margin-right: 10px;
              }
              
              &-delayed {
@@ -123,6 +124,12 @@
                  box-shadow: 0 0 6px 0px #d60000;
                  animation: cancelledAnimation 2s infinite;
              }
+
+             &-inactive {
+                @extend .list-table-info__board--status-dot;
+                background-color: #494e66;
+                box-shadow: 0 0 6px 0px #3e4257;
+            }
  
              &-onTime {
                  @extend .list-table-info__board--status-dot;
@@ -213,12 +220,19 @@
             &--time {
                 &--item {
                     font-size: 14px;
-                    padding: 6px;
+                    padding: 6px 0px 6px 4px;
                 }
             }
 
             &--status{
                 width: 2.5%;
+
+                &-dot {
+                    top: 11px;
+                    left: 8px;
+                    width: 6px;
+                    height: 6px;
+                }
             }
 
             &--destination-name {

@@ -61,11 +61,11 @@ export class DestinationOverviewComponent implements OnInit {
       this.settingsDataJSON = JSON.stringify(this.settings);
     } catch (error) {
       console.error('Error loading data in component', error);
+      // location.reload();
     } finally {
       this.loading = false;
       this.setZoomStyle();
       this.cdr.detectChanges();
-      console.log(this.destinationsData);
     }
   }
 
