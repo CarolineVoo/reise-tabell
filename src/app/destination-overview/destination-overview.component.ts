@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import * as xml2js from 'xml2js';
 import { DestinationsService } from 'src/app/services/destinations.service';
 import DestinationsModel from '../models/destinations.model';
 import { DestinationModel } from '../models/destination.model';
@@ -36,7 +35,9 @@ export class DestinationOverviewComponent implements OnInit {
     this.getQueryParamDataFromUrl();
     this.loading = true;
     sessionStorage.removeItem("destinationToggleData");
-    this.initDestinationModel();
+    setTimeout(() => {
+      this.initDestinationModel();
+    }, 0);
     this.getDestinationsData();
     setInterval(()=> {
       this.getDestinationsData();
@@ -50,7 +51,7 @@ export class DestinationOverviewComponent implements OnInit {
   private initDestinationModel() {
     this.destinationsData = new DestinationsModel;
     this.destinationsData.destinations = new Array<DestinationModel>;
-    this.destinationList = this.setDestinationList(this.settings.destination);
+    this.destinationList = this.setDestinationList(this.settings?.destination);
   }
 
   public async getDestinationsData() {
@@ -77,7 +78,7 @@ export class DestinationOverviewComponent implements OnInit {
       return new DestinationsModel;
     }
     this.resetRouteListForDestinations();
-    this.destinationList.forEach((travelFrom: string) => {
+    this.destinationList?.forEach((travelFrom: string) => {
       routeList.forEach((routes: any) => {
         if(Array.isArray(routes.EstimatedCalls?.EstimatedCall)) {
           routes?.EstimatedCalls?.EstimatedCall.forEach((x: any) => {
@@ -386,6 +387,6 @@ export class DestinationOverviewComponent implements OnInit {
   }
 
   private setDestinationList(destinations: string): Array<string> {
-    return destinations.split(',');
+    return destinations?.split(',');
   }
 }

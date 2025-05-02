@@ -49,7 +49,7 @@ export class DestinationTableDetailsComponent implements OnInit{
 
   private saveToggleStorageData(): void {
     let toggleStorage: Array<any> = [];
-    this.destinations.destinations.forEach((value: any) => {
+    this.destinations?.destinations?.forEach((value: any) => {
       toggleStorage.push({routeID: value.routeID, destinationName: value.destinationName, expanded: value.expanded});
     }) 
     sessionStorage.setItem("destinationToggleData", JSON.stringify(toggleStorage));
@@ -61,7 +61,7 @@ export class DestinationTableDetailsComponent implements OnInit{
 
   private setTableActive(destinations: DestinationsModel): boolean { 
     let active = false;
-    destinations.destinations.forEach(route => {
+    destinations?.destinations?.forEach(route => {
       if(this.vehicleType(route.type) && route.visible && route.travelFrom == this.travelFrom) {
         active = true;
       }

@@ -1,6 +1,6 @@
 <div class="destination-overview" #overviewElement>
     <div *ngIf="!loading">
-        <div class="destination-overview__header"> 
+        <div *ngIf="destinationList" class="destination-overview__header"> 
             <h1 class="destination-overview__title"> 
                 {{destinationList.length <= 1 ? settings.destination : ''}}
             </h1>
