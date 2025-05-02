@@ -33,6 +33,7 @@ export class InputTextComponent {
   public onClickClearText() {
       this.inputText.nativeElement.value = '';
       this.showClearIcon = false;
+      this.textChange.emit('');
   }
 
 }

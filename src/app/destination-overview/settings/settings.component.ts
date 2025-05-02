@@ -44,6 +44,7 @@ export class SettingsComponent {
 }
 
   onClickSearchDestinations() {
+    this.destinationSearchList = this.destinationSearchList.filter(destination => destination != '');
     this.settings.destination = this.destinationSearchList.toString();
     sessionStorage.setItem("settingsDate", JSON.stringify(this.settings));
     this.settingsService.updateQueryString(this.settings);
